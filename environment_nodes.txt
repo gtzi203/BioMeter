@@ -1,0 +1,65 @@
+minetest_game = [
+  heat = {
+    fire:basic_flame (20),
+    fire:permanent_flame (20),
+    default:lava_source (25),
+    default:lava_flowing (20),
+    default:furnace_active (5),
+    default:torch (3),
+    default:torch_wall (3)
+  }
+
+  freeze = {
+    default:snow (-0.3),
+    default:snowblock (-0.3),
+    default:dirt_with_snow (-0.05)
+    default:water_source (-0.07),
+    default:water_flowing (-0.07),
+    default:river_water_source (-0.05),
+    default:river_water_flowing (-0.05)
+  }
+]
+
+mineclone = [
+  heat = {
+    mcl_fire:fire (20),
+    mcl_fire:eternal_fire (20),
+    mcl_blackstone:soul_fire (17),
+    mcl_campfires:campfire_lit (20),
+    mcl_campfires:soul_campfire_lit (17),
+    mcl_lanterns:lantern_floor (0.6),
+    mcl_lanterns:lantern_ceiling (0.6),
+    mcl_lanterns:soul_lantern_floor (0.5),
+    mcl_lanterns:soul_lantern_ceiling (0.5),
+    mcl_lanterns:gold_lantern_floor (0.4),
+    mcl_lanterns:gold_lantern_ceiling (0.4),
+    mcl_core:lava_source (25),
+    mcl_core:lava_flowing (20),
+    mcl_furnaces:furnace_active (5),
+    mcl_blast_furnace:blast_furnace (6),
+    mcl_smoker:smoker_active (4),
+    mcl_torches:torch (3),
+    mcl_torches:torch_wall (3),
+    mcl_blackstone:soul_torch (2),
+    mcl_blackstone:soul_torch_wall (2)
+  }
+
+  freeze = {
+    mcl_core:snow (-0.3),
+    mcl_core:snow_2 (-0.3),
+    mcl_core:snow_3 (-0.3),
+    mcl_core:snow_4 (-0.3),
+    mcl_core:snow_5 (-0.3),
+    mcl_core:snow_6 (-0.3),
+    mcl_core:snow_7 (-0.3),
+    mcl_core:snow_8 (-0.3),
+    mcl_core:snowblock (-0.3),
+    mcl_powder_snow:powder_snow (-0.4),
+    mcl_core:dirt_with_grass_snow (-0.05),
+    mcl_core:podzol_snow (-0.07),
+    mcl_core:water_source (-0.07),
+    mcl_core:water_flowing (-0.07),
+    mclx_core:river_water_source (-0.05),
+    mclx_core:river_water_flowing (-0.05)
+  }
+]
