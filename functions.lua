@@ -157,7 +157,7 @@ function set_temp(player, temp)
       temp = temp_base + temp_extra
     end
     if id and temp then
-      temp = -13.2
+      --temp = -13.2
       if s.temp_in == "fahrenheit" then
         temp_f = math.floor((temp * 9 / 5 + 32) * decimal + 0.5) / decimal
       end
