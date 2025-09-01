@@ -1,5 +1,0 @@
-[biometer]
-
-
-#The temperature that will be used in the hud.
-biometer.temperature_in (Temperature in) enum Celsius Celsius,Fahrenheit
