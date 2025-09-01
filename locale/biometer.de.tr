@@ -1,6 +1,11 @@
 # textdomain: biometer
 
 Hydration=Hydrierung
+Temperature in=Temperatur in
+Cancel=Abbrechen
+Apply Changes=Änderungen übernehmen
+Set to Default=auf Standart setzen
+This is only for survival mode=Das ist nur für den Überlebensmodus
 
 Water Bottle=Wasserflasche
 River Water Bottle=Flusswasserflasche

@@ -47,3 +47,6 @@ Water sound effect original by "u\_m17uwtnjmh". Sound Name: "Soft Waves on the B
 
 Profile: https://pixabay.com/de/users/u\_m17uwtnjmh-42333415/
 
+
+
+The water bottles/drinking glasses textures are edited textures from their empty variant (out of minetest_game)

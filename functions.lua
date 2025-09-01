@@ -10,6 +10,17 @@ local ther_min = -20
 local ther_max = 50
 local ther_scale_min = 0
 local ther_scale_max = 8
+local ther_off_x = -100
+local ther_off_y = 0
+
+function button_action(player)
+  player_name = player:get_player_name()
+  if not minetest.is_creative_enabled(player:get_player_name()) then
+    minetest.show_formspec(player_name, "biometer:ui", get_ui(player, true))
+  else
+    minetest.chat_send_player(player_name, "[BioMeter] "..S("This is only for survival mode")..".")
+  end
+end
 
 function current_biome(player)
   local biome_data = minetest.get_biome_data(player:get_pos())
@@ -125,6 +136,120 @@ function update_temp(player, temp)
   end
 end
 
+function bm_rgb_to_hex(r, g, b)
+  return string.format("%02X%02X%02X", r, g, b)
+end
+
+function get_rgb(v)
+  v = v:gsub("%s", "")
+
+  local r,g,b = v:match("^(%d+),(%d+),(%d+)$")
+  r, g, b = tonumber(r), tonumber(g), tonumber(b)
+
+  return r, g, b
+end
+
+function update_ui_ther(player, big, small, update_color)
+  if not minetest.is_creative_enabled(player:get_player_name()) then
+    local meta = player:get_meta()
+    local r, g, b = get_rgb(meta:get_string("bm_ther_color"))
+    local id_bg = meta:get_string("bm_bg_id")
+    local id_r_text = meta:get_string("bm_r_text_id")
+    local id_g_text = meta:get_string("bm_g_text_id")
+    local id_b_text = meta:get_string("bm_b_text_id")
+    local id = meta:get_string("bm_temp_dis_id")
+    local id_ther = meta:get_string("bm_temp_dis_ther_id")
+    local id_ther_inner = meta:get_string("bm_temp_dis_ther_inner_id")
+    local id_ther_inner_down = meta:get_string("bm_temp_dis_ther_inner_down_id")
+
+    if big then
+      ther_off_x = -747
+      ther_off_y = -393.5
+      ther_scale_max = 16
+
+      player:hud_change(id_bg, "text", "biometer_bg.png^[opacity:255")
+
+      player:hud_change(id, "offset", {x = -747, y = -795})
+      player:hud_change(id, "z_index", 10003)
+
+      player:hud_change(id_ther, "offset", {x = -747, y = -550})
+      player:hud_change(id_ther, "scale", {x = 16, y = 16})
+      player:hud_change(id_ther, "z_index", 10003)
+
+      player:hud_change(id_ther_inner, "offset", {x = ther_off_x, y = -550})
+      player:hud_change(id_ther_inner, "scale", {x = 16, y = 16})
+      player:hud_change(id_ther_inner, "z_index", 10001)
+
+      player:hud_change(id_ther_inner_down, "offset", {x = -747, y = -550})
+      player:hud_change(id_ther_inner_down, "scale", {x = 16, y = 16})
+      player:hud_change(id_ther_inner_down, "z_index", 10002)
+
+      player:hud_change(id_r_text, "text", r)
+      player:hud_change(id_g_text, "text", g)
+      player:hud_change(id_b_text, "text", b)
+
+      set_temp(player)
+    end
+
+    if small then
+      ther_off_x = -100
+      ther_off_y = 0
+      ther_scale_max = 8
+
+      player:hud_change(id_bg, "text", "biometer_bg.png^[opacity:0")
+
+      player:hud_change(id, "offset", {x = -100, y = -255})
+      player:hud_change(id, "z_index", 5)
+
+      player:hud_change(id_ther, "offset", {x = -100, y = -125})
+      player:hud_change(id_ther, "scale", {x = 8, y = 8})
+      player:hud_change(id_ther, "z_index", 5)
+
+      player:hud_change(id_ther_inner, "offset", {x = -100, y = -125})
+      player:hud_change(id_ther_inner, "scale", {x = 8, y = 8})
+      player:hud_change(id_ther_inner, "z_index", 3)
+
+      player:hud_change(id_ther_inner_down, "offset", {x = -100, y = -125})
+      player:hud_change(id_ther_inner_down, "scale", {x = 8, y = 8})
+      player:hud_change(id_ther_inner_down, "z_index", 4)
+
+      player:hud_change(id_r_text, "text", "")
+      player:hud_change(id_g_text, "text", "")
+      player:hud_change(id_b_text, "text", "")
+
+      set_temp(player)
+    end
+
+    if update_color then
+      update_ther_color(player, "change")
+
+      r, g, b = get_rgb(meta:get_string("bm_ther_color_change"))
+
+      player:hud_change(id_r_text, "text", r)
+      player:hud_change(id_g_text, "text", g)
+      player:hud_change(id_b_text, "text", b)
+    end
+  end
+end
+
+function update_ther_color(player, set_as_new)
+  if not minetest.is_creative_enabled(player:get_player_name()) then
+    local meta = player:get_meta()
+    local id = meta:get_string("bm_temp_dis_ther_inner_id")
+    local id_down = meta:get_string("bm_temp_dis_ther_inner_down_id")
+    local r, g, b = get_rgb(meta:get_string("bm_ther_color"))
+    if set_as_new == "yes" then
+      meta:set_string("bm_ther_color", meta:get_string("bm_ther_color_change"))
+      r, g, b = get_rgb(meta:get_string("bm_ther_color"))
+    elseif set_as_new == "change" then
+      r, g, b = get_rgb(meta:get_string("bm_ther_color_change"))
+    end
+
+    player:hud_change(id, "text", "biometer_thermometer_inner.png^[multiply:#"..bm_rgb_to_hex(r, g, b))
+    player:hud_change(id_down, "text", "biometer_thermometer_inner_down.png^[multiply:#"..bm_rgb_to_hex(r, g, b))
+  end
+end
+
 function update_ther_inner(player, temp)
   if not minetest.is_creative_enabled(player:get_player_name()) then
     local meta = player:get_meta()
@@ -138,12 +263,12 @@ function update_ther_inner(player, temp)
     end
 
     local scale_y = (temp - ther_min) / (ther_max - ther_min) * (ther_scale_max - ther_scale_min) + ther_scale_min
-    player:hud_change(id, "scale", {x = 8, y = scale_y})
+    player:hud_change(id, "scale", {x = ther_scale_max, y = scale_y})
 
     local base_offset_y = -94  -- +4 = 4px tiefer (anpassen nach Bedarf)
     local offset_y = base_offset_y - (scale_y * 3.9)
 
-    player:hud_change(id, "offset", {x = -100, y = offset_y})
+    player:hud_change(id, "offset", {x = ther_off_x, y = offset_y + ther_off_y})
   end
 end
 
@@ -158,10 +283,18 @@ function set_temp(player, temp)
     end
     if id and temp then
       --temp = -13.2
-      if s.temp_in == "fahrenheit" then
-        temp_f = math.floor((temp * 9 / 5 + 32) * decimal + 0.5) / decimal
+      local temp_sym = "°C"
+      local display_temp = temp
+
+      if meta:get_string("bm_temp_in") == "fahrenheit" then
+        display_temp = math.floor((temp * 9 / 5 + 32) * decimal + 0.5) / decimal
+        temp_sym = "°F"
+      elseif meta:get_string("bm_temp_in") == "kelvin" then
+        display_temp = math.floor((temp + 273.15) * decimal + 0.5) / decimal
+        temp_sym = "K"
       end
-      player:hud_change(id, "text", (temp_f or temp)..s.temp_sym)
+
+      player:hud_change(id, "text", display_temp .. temp_sym)
       update_temp(player, temp)
       update_ther_inner(player, temp)
     end

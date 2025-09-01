@@ -1,6 +1,11 @@
 # textdomain: biometer
 
 Hydration=Hydratace
+Temperature in=Teplota v
+Cancel=Zrušit
+Apply Changes=Použít změny
+Set to Default=Obnovit výchozí
+This is only for survival mode=Toto je pouze pro režim přežití
 
 Water Bottle=Láhev s vodou
 River Water Bottle=Láhev s říční vodou

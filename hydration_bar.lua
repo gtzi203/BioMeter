@@ -17,7 +17,7 @@ minetest.register_on_joinplayer(function(player)
         text = "biometer_hydration_icon_minetest_game.png",
         number = 20,
         size = {x = 24, y = 24},
-        z_index = 1
+        z_index = 0
       })
     else
       id = player:hud_add({
@@ -29,7 +29,7 @@ minetest.register_on_joinplayer(function(player)
         number = 20,
         item = 20,
         size = {x = 24, y = 24},
-        z_index = 1
+        z_index = 0
       })
     end
     local id_hydr_black = player:hud_add({

@@ -15,14 +15,6 @@ else
   cgs = "mineclonia"
 end
 
-s = {}
-s.temp_in = string.lower(minetest.settings:get("biometer.temperature_in") or "Celsius")
-if s.temp_in == "celsius" then
-  s.temp_sym = "°C"
-else
-  s.temp_sym = "°F"
-end
-
 local file = io.open(modpath.."/environment_nodes.txt", "r")
 if not file then
     print("Error while reading a file")
@@ -54,3 +46,4 @@ dofile(modpath .. "/functions.lua")
 dofile(modpath .. "/hydration_bar.lua")
 dofile(modpath .. "/temperature_display.lua")
 dofile(modpath .. "/items.lua")
+dofile(modpath .. "/ui.lua")

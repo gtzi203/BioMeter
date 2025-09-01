@@ -1,6 +1,11 @@
 # textdomain: biometer
 
 Hydration=Гидратация
+Temperature in=Температура в
+Cancel=Отмена
+Apply Changes=Применить изменения
+Set to Default=Сбросить по умолчанию
+This is only for survival mode=Это только для режима выживания
 
 Water Bottle=Бутылка воды
 River Water Bottle=Бутылка речной воды
