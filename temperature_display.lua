@@ -104,6 +104,7 @@ minetest.register_on_joinplayer(function(player)
     meta:set_string("bm_temp_dis_ther_inner_down_id", id_ther_inner_down)
     meta:set_string("bm_ther_heat_id", id_ther_heat)
     meta:set_string("bm_ther_freeze_id", id_ther_freeze)
+    meta:set_string("bm_to_temp_dmg", "false")
     meta:set_string("bm_temp_in", meta:get_string("bm_temp_in") ~= "" and meta:get_string("bm_temp_in") or "celsius")
     meta:set_string("bm_temp_in_old", meta:get_string("bm_temp_in_old") ~= "" and meta:get_string("bm_temp_in_old") or "celsius")
     meta:set_string("bm_ther_color", meta:get_string("bm_ther_color") ~= "" and meta:get_string("bm_ther_color") or "196, 0, 0")
@@ -119,8 +120,14 @@ minetest.register_on_respawnplayer(function(player)
     local meta = player:get_meta()
     meta:set_string("bm_cur_biome", current_biome(player).name)
 
+    meta:set_string("bm_to_temp_dmg", "true")
+
     calc_temp(player, true)
     set_temp(player)
+
+    minetest.after(2, function()
+      meta:set_string("bm_to_temp_dmg", "false")
+    end)
   end
 end)
 

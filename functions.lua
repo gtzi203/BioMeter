@@ -117,8 +117,10 @@ function update_temp(player, temp)
           player:hud_change(cur_id, "text", "biometer_freeze_"..alignments[i].alignment..".png^[transformR"..alignments[i].rot.."^[opacity:"..((temp + 4) * -1) * 15)
         end
       end
-      local hp = player:get_hp()
-      player:set_hp(hp - 4)
+      if meta:get_string("bm_to_temp_dmg") == "false" then
+        local hp = player:get_hp()
+        player:set_hp(hp - 4)
+      end
     else
       local id_heat = meta:get_string("bm_ther_heat_id")
       player:hud_change(id_heat, "text", "biometer_thermometer_heat.png^[opacity:0")
