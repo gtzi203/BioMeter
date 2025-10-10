@@ -166,7 +166,7 @@ function get_ui(player, new)
       r, g, b = get_rgb(meta:get_string("bm_ther_color_change"))
     end
 
-    meta:set_string("bm_to_temp_dmg", "true")
+    meta:set_string("bm_do_temp_dmg", "true")
 
     formspec = (
       "formspec_version[6]"..
@@ -255,7 +255,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     if fields.apply then
       minetest.close_formspec(player_name, formname)
       update_ui_ther(player, false, true, false)
-      meta:set_string("bm_to_temp_dmg", "false")
+      meta:set_string("bm_do_temp_dmg", "false")
       update_ther_color(player, "yes")
       return true
     end
@@ -263,7 +263,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     if fields.quit then
       meta:set_string("bm_temp_in", meta:get_string("bm_temp_in_old"))
       update_ui_ther(player, false, true, false)
-      meta:set_string("bm_to_temp_dmg", "false")
+      meta:set_string("bm_do_temp_dmg", "false")
       update_ther_color(player, "no")
       set_temp(player)
     end
