@@ -13,6 +13,9 @@ local ther_scale_max = 8
 local ther_off_x = -100
 local ther_off_y = 0
 
+local temp_y_up_max = 500
+local temp_y_down_max = 600
+
 function button_action(player)
   player_name = player:get_player_name()
   if not minetest.is_creative_enabled(player:get_player_name()) then
@@ -61,7 +64,16 @@ function calc_temp(player, base)
       end
     end
 
-    temp_r = temp_r + (player_pos.y * -1 * 0.03)
+    if player_pos.y <= temp_y_up_max and player_pos.y >= temp_y_down_max * -1 then
+      temp_r = temp_r + (player_pos.y * -1 * 0.03)
+      minetest.chat_send_all("calc y"..player_pos.y)
+    else
+      if player_pos.y >= 0 then
+        temp_r = temp_r + (temp_y_up_max * -1 * 0.03)
+      else
+        temp_r = temp_r + (temp_y_down_max * 0.03)
+      end
+    end
 
     local tod = minetest.get_timeofday()
     if tod >= 0.2 and tod < 0.4 then
