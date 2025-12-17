@@ -50,3 +50,5 @@ Profile: https://pixabay.com/de/users/u\_m17uwtnjmh-42333415/
 
 
 The water bottles/drinking glasses textures are edited textures from their empty variant (out of minetest_game)
+
+The fill_cauldron and the dispense_water_bottle function are from VoxeLibre.

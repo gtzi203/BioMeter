@@ -7,7 +7,7 @@ local index = 0
 
 minetest.register_chatcommand("bm", {
   description = "Opens the BM UI.",
-  func = function(name)
+  func = function(name, param)
     player = minetest.get_player_by_name(name)
 
     button_action(player)
@@ -24,6 +24,20 @@ minetest.register_chatcommand("bm_reset", {
     update_ther_color(player, "no")
     set_temp(player)
     minetest.chat_send_player(name, "[BioMeter] UI reseted!")
+end})
+
+minetest.register_chatcommand("bm_hydr", {
+  description = "Set hydration to n.",
+  params = "<number>",
+  privs = {creative = true},
+  func = function(name, param)
+    param = tonumber(param)
+    if param and param >= 0 and param <= 20 then
+      set_hydr_bar(minetest.get_player_by_name(name), false, param)
+      minetest.chat_send_player(name, "Hydration set to "..param..".")
+    else
+      minetest.chat_send_player(name, "Please use a valid number number (0-20).")
+    end
 end})
 
 if minetest.global_exists("sfinv") then

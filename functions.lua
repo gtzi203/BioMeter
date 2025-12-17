@@ -66,7 +66,6 @@ function calc_temp(player, base)
 
     if player_pos.y <= temp_y_up_max and player_pos.y >= temp_y_down_max * -1 then
       temp_r = temp_r + (player_pos.y * -1 * 0.03)
-      minetest.chat_send_all("calc y"..player_pos.y)
     else
       if player_pos.y >= 0 then
         temp_r = temp_r + (temp_y_up_max * -1 * 0.03)
