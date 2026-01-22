@@ -1,6 +1,8 @@
 
 --functions
 
+bm = {}
+
 local S = minetest.get_translator(minetest.get_current_modname())
 
 local decimal = 10 ^ 1
@@ -15,6 +17,8 @@ local ther_off_y = 0
 
 local temp_y_up_max = 500
 local temp_y_down_max = 600
+
+bm.ui_state = {}
 
 function button_action(player)
   player_name = player:get_player_name()
@@ -164,7 +168,15 @@ end
 
 function update_ui_ther(player, big, small, update_color)
   if not minetest.is_creative_enabled(player:get_player_name()) then
+    local player_name = player:get_player_name()
     local meta = player:get_meta()
+
+    bm.ui_state[player_name] = bm.ui_state[player_name] or {
+      ther_off_x = -100,
+      ther_off_y = 0,
+      ther_scale_max = 8
+    }
+
     local r, g, b = get_rgb(meta:get_string("bm_ther_color"))
     local id_bg = meta:get_string("bm_bg_id")
     local id_r_text = meta:get_string("bm_r_text_id")
@@ -176,9 +188,9 @@ function update_ui_ther(player, big, small, update_color)
     local id_ther_inner_down = meta:get_string("bm_temp_dis_ther_inner_down_id")
 
     if big then
-      ther_off_x = -747
-      ther_off_y = -393.5
-      ther_scale_max = 16
+      bm.ui_state[player_name].ther_off_x = -747
+      bm.ui_state[player_name].ther_off_y = -393.5
+      bm.ui_state[player_name].ther_scale_max = 16
 
       player:hud_change(id_bg, "text", "biometer_bg.png^[opacity:255")
 
@@ -189,7 +201,7 @@ function update_ui_ther(player, big, small, update_color)
       player:hud_change(id_ther, "scale", {x = 16, y = 16})
       player:hud_change(id_ther, "z_index", 10003)
 
-      player:hud_change(id_ther_inner, "offset", {x = ther_off_x, y = -550})
+      player:hud_change(id_ther_inner, "offset", {x = bm.ui_state[player_name].ther_off_x, y = -550})
       player:hud_change(id_ther_inner, "scale", {x = 16, y = 16})
       player:hud_change(id_ther_inner, "z_index", 10001)
 
@@ -205,9 +217,9 @@ function update_ui_ther(player, big, small, update_color)
     end
 
     if small then
-      ther_off_x = -100
-      ther_off_y = 0
-      ther_scale_max = 8
+      bm.ui_state[player_name].ther_off_x = -100
+      bm.ui_state[player_name].ther_off_y = 0
+      bm.ui_state[player_name].ther_scale_max = 8
 
       player:hud_change(id_bg, "text", "biometer_bg.png^[opacity:0")
 
@@ -237,7 +249,6 @@ function update_ui_ther(player, big, small, update_color)
       update_ther_color(player, "change")
 
       r, g, b = get_rgb(meta:get_string("bm_ther_color_change"))
-
       player:hud_change(id_r_text, "text", r)
       player:hud_change(id_g_text, "text", g)
       player:hud_change(id_b_text, "text", b)
@@ -265,23 +276,25 @@ end
 
 function update_ther_inner(player, temp)
   if not minetest.is_creative_enabled(player:get_player_name()) then
+    local player_name = player:get_player_name()
     local meta = player:get_meta()
     local id = meta:get_string("bm_temp_dis_ther_inner_id")
 
     if temp < ther_min then
       temp = ther_min
     end
+
     if temp > ther_max then
       temp = ther_max
     end
 
-    local scale_y = (temp - ther_min) / (ther_max - ther_min) * (ther_scale_max - ther_scale_min) + ther_scale_min
-    player:hud_change(id, "scale", {x = ther_scale_max, y = scale_y})
+    local scale_y = (temp - ther_min) / (ther_max - ther_min) * (bm.ui_state[player_name].ther_scale_max - ther_scale_min) + ther_scale_min
+    player:hud_change(id, "scale", {x = bm.ui_state[player_name].ther_scale_max, y = scale_y})
 
-    local base_offset_y = -94  -- +4 = 4px tiefer (anpassen nach Bedarf)
+    local base_offset_y = -94
     local offset_y = base_offset_y - (scale_y * 3.9)
 
-    player:hud_change(id, "offset", {x = ther_off_x, y = offset_y + ther_off_y})
+    player:hud_change(id, "offset", {x = bm.ui_state[player_name].ther_off_x, y = offset_y + bm.ui_state[player_name].ther_off_y})
   end
 end
 

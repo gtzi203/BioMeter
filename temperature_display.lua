@@ -11,7 +11,8 @@ local interval_b = 5
 local interval_e = 2
 
 minetest.register_on_joinplayer(function(player)
-  if not minetest.is_creative_enabled(player:get_player_name()) then
+  local player_name = player:get_player_name()
+  if not minetest.is_creative_enabled(player_name) then
     local meta = player:get_meta()
     alignments = {
       [1] = {alignment = "left", pos = {x = 0, y = 0}, ofs = {x = 1, y = 1}, rot = 0},
@@ -109,6 +110,8 @@ minetest.register_on_joinplayer(function(player)
     meta:set_string("bm_temp_in_old", meta:get_string("bm_temp_in_old") ~= "" and meta:get_string("bm_temp_in_old") or "celsius")
     meta:set_string("bm_ther_color", meta:get_string("bm_ther_color") ~= "" and meta:get_string("bm_ther_color") or "196, 0, 0")
     meta:set_string("bm_ther_color_change", meta:get_string("bm_ther_color_change") ~= "" and meta:get_string("bm_ther_color_change") or "196, 0, 0")
+
+    bm.ui_state[player_name] = {ther_off_x = -100, ther_off_y = 0, ther_scale_max = 8}
 
     set_temp(player)
     update_ther_color(player)

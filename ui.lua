@@ -3,7 +3,7 @@
 
 local S = minetest.get_translator(minetest.get_current_modname())
 
-local index = 0
+local index = {}
 
 minetest.register_chatcommand("bm", {
   description = "Opens the BM UI.",
@@ -163,7 +163,9 @@ function get_ui(player, new)
     local r, g, b
     local temp_in
 
-    index = index + 1
+    index[player:get_player_name()] = (tonumber(index[player:get_player_name()] or 0) + 1)
+    local player_index = index[player:get_player_name()]
+
 
     if meta:get_string("bm_temp_in") == "celsius" then
       temp_in = 1
@@ -194,15 +196,15 @@ function get_ui(player, new)
 
       "label[0,0.25;R]"..
       "box[0.3,0.01;3.99,0.48;#FF0000CC]"..
-      "scrollbar[0.3,0;4,0.5;horizontal;r_"..index..";"..r.."]"..
+      "scrollbar[0.3,0;4,0.5;horizontal;r_"..player_index..";"..r.."]"..
 
       "label[0,1.25;G]"..
       "box[0.3,1.01;3.99,0.48;#00FF00CC]"..
-      "scrollbar[0.3,1;4,0.5;horizontal;g_"..index..";"..g.."]"..
+      "scrollbar[0.3,1;4,0.5;horizontal;g_"..player_index..";"..g.."]"..
 
       "label[0,2.25;B]"..
       "box[0.3,2.01;3.99,0.48;#0000FFCC]"..
-      "scrollbar[0.3,2;4,0.5;horizontal;b_"..index..";"..b.."]"..
+      "scrollbar[0.3,2;4,0.5;horizontal;b_"..player_index..";"..b.."]"..
 
       "button[0,2.9;2.5,0.7;default_color;"..S("Set to Default").."]"..
 
@@ -231,11 +233,12 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
     local meta = player:get_meta()
     local player_name = player:get_player_name()
+    local player_index = index[player:get_player_name()]
 
-    if fields["r_"..index] or fields["g_"..index] or fields["b_"..index] then
-      local r = tonumber(fields["r_"..index]:match("%d+"))
-      local g = tonumber(fields["g_"..index]:match("%d+"))
-      local b = tonumber(fields["b_"..index]:match("%d+"))
+    if fields["r_"..player_index] or fields["g_"..player_index] or fields["b_"..player_index] then
+      local r = tonumber(fields["r_"..player_index]:match("%d+"))
+      local g = tonumber(fields["g_"..player_index]:match("%d+"))
+      local b = tonumber(fields["b_"..player_index]:match("%d+"))
       meta:set_string("bm_ther_color_change", r..", "..g..", "..b)
       update_ui_ther(player, false, false, true)
     end
