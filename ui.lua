@@ -10,7 +10,7 @@ minetest.register_chatcommand("bm", {
   func = function(name, param)
     player = minetest.get_player_by_name(name)
 
-    button_action(player)
+    biometer.button_action(player)
 end})
 
 minetest.register_chatcommand("bm_reset", {
@@ -20,9 +20,9 @@ minetest.register_chatcommand("bm_reset", {
     local meta = player:get_meta()
 
     meta:set_string("bm_temp_in", meta:get_string("bm_temp_in_old"))
-    update_ui_ther(player, false, true, false)
-    update_ther_color(player, "no")
-    set_temp(player)
+    biometer.update_ui_ther(player, false, true, false)
+    biometer.update_ther_color(player, "no")
+    biometer.set_temp(player)
     minetest.chat_send_player(name, "[BioMeter] UI reseted!")
 end})
 
@@ -33,7 +33,7 @@ minetest.register_chatcommand("bm_hydr", {
   func = function(name, param)
     param = tonumber(param)
     if param and param >= 0 and param <= 20 then
-      set_hydr_bar(minetest.get_player_by_name(name), false, param)
+      biometer.set_hydr_bar(minetest.get_player_by_name(name), false, param)
       minetest.chat_send_player(name, "Hydration set to "..param..".")
     else
       minetest.chat_send_player(name, "Please use a valid number number (0-20).")
@@ -48,7 +48,7 @@ if minetest.global_exists("sfinv") then
     end,
     on_enter = function(self, player, context)
       sfinv.contexts[player:get_player_name()].page = sfinv.get_homepage_name(player)
-      button_action(player)
+      biometer.button_action(player)
     end
   })
 end
@@ -70,7 +70,7 @@ if minetest.global_exists("mcl_inventory") then
       return ""
     end,
     handle = function(player, fields)
-      button_action(player)
+      biometer.button_action(player)
     end
   })
 end
@@ -81,7 +81,7 @@ if minetest.global_exists("unified_inventory") then
     image = "biometer_icon.png",
     tooltip = "BioMeter",
     action = function(player)
-      button_action(player)
+      biometer.button_action(player)
     end
   })
 end
@@ -91,7 +91,7 @@ if minetest.global_exists("i3") then
     description = "BioMeter",
     fields = function(player, data, fields)
       i3.set_tab(player, "inventory")
-      button_action(player)
+      biometer.button_action(player)
     end
   })
 end
@@ -152,9 +152,9 @@ minetest.register_on_dieplayer(function(player)
   local meta = player:get_meta()
 
   meta:set_string("bm_temp_in", meta:get_string("bm_temp_in_old"))
-  update_ui_ther(player, false, true, false)
-  update_ther_color(player, "no")
-  set_temp(player)
+  biometer.update_ui_ther(player, false, true, false)
+  biometer.update_ther_color(player, "no")
+  biometer.set_temp(player)
 end)
 
 function get_ui(player, new)
@@ -219,7 +219,7 @@ function get_ui(player, new)
       "button[8.8,8.9;3,0.8;apply;"..S("Apply Changes").."]"
     )
 
-    update_ui_ther(player, true, false, false)
+    biometer.update_ui_ther(player, true, false, false)
 
     return formspec
   end
@@ -240,49 +240,49 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
       local g = tonumber(fields["g_"..player_index]:match("%d+"))
       local b = tonumber(fields["b_"..player_index]:match("%d+"))
       meta:set_string("bm_ther_color_change", r..", "..g..", "..b)
-      update_ui_ther(player, false, false, true)
+      biometer.update_ui_ther(player, false, false, true)
     end
 
     if fields.default_color then
       meta:set_string("bm_ther_color_change", "196, 0, 0")
       minetest.show_formspec(player_name, "biometer:ui", get_ui(player, false))
-      update_ui_ther(player, false, false, true)
+      biometer.update_ui_ther(player, false, false, true)
     end
 
     if fields.temperature_in then
       if fields.temperature_in == "Celsius" then
         meta:set_string("bm_temp_in", "celsius")
-        set_temp(player)
+        biometer.set_temp(player)
       elseif fields.temperature_in == "Fahrenheit" then
         meta:set_string("bm_temp_in", "fahrenheit")
-        set_temp(player)
+        biometer.set_temp(player)
       elseif fields.temperature_in == "Kelvin" then
         meta:set_string("bm_temp_in", "kelvin")
-        set_temp(player)
+        biometer.set_temp(player)
       end
     end
 
     if fields.default_temp then
       meta:set_string("bm_temp_in", "celsius")
       minetest.show_formspec(player_name, "biometer:ui", get_ui(player, false))
-      update_ui_ther(player, false, false, true)
-      set_temp(player)
+      biometer.update_ui_ther(player, false, false, true)
+      biometer.set_temp(player)
     end
 
     if fields.apply then
       minetest.close_formspec(player_name, formname)
-      update_ui_ther(player, false, true, false)
+      biometer.update_ui_ther(player, false, true, false)
       meta:set_string("bm_do_temp_dmg", "false")
-      update_ther_color(player, "yes")
+      biometer.update_ther_color(player, "yes")
       return true
     end
 
     if fields.quit then
       meta:set_string("bm_temp_in", meta:get_string("bm_temp_in_old"))
-      update_ui_ther(player, false, true, false)
+      biometer.update_ui_ther(player, false, true, false)
       meta:set_string("bm_do_temp_dmg", "false")
-      update_ther_color(player, "no")
-      set_temp(player)
+      biometer.update_ther_color(player, "no")
+      biometer.set_temp(player)
     end
 
     return true

@@ -98,7 +98,7 @@ minetest.register_on_joinplayer(function(player)
       text = "biometer_thermometer_freeze.png^[opacity:0",
       z_index = 1
     })
-    meta:set_string("bm_cur_biome", current_biome(player).name)
+    meta:set_string("bm_cur_biome", biometer.current_biome(player).name)
     meta:set_string("bm_temp_dis_id", id)
     meta:set_string("bm_temp_dis_ther_id", id_ther)
     meta:set_string("bm_temp_dis_ther_inner_id", id_ther_inner)
@@ -113,20 +113,20 @@ minetest.register_on_joinplayer(function(player)
 
     bm.ui_state[player_name] = {ther_off_x = -100, ther_off_y = 0, ther_scale_max = 8}
 
-    set_temp(player)
-    update_ther_color(player)
+    biometer.set_temp(player)
+    biometer.update_ther_color(player)
   end
 end)
 
 minetest.register_on_respawnplayer(function(player)
   if not minetest.is_creative_enabled(player:get_player_name()) then
     local meta = player:get_meta()
-    meta:set_string("bm_cur_biome", current_biome(player).name)
+    meta:set_string("bm_cur_biome", biometer.current_biome(player).name)
 
     meta:set_string("bm_do_temp_dmg", "true")
 
-    calc_temp(player, true)
-    set_temp(player)
+    biometer.calc_temp(player, true)
+    biometer.set_temp(player)
 
     minetest.after(2, function()
       meta:set_string("bm_do_temp_dmg", "false")
@@ -142,8 +142,8 @@ minetest.register_globalstep(function(dtime)
     timer_n = 0
     for _, player in ipairs(minetest.get_connected_players()) do
       if not minetest.is_creative_enabled(player:get_player_name()) then
-        calc_temp(player, true)
-        set_temp(player)
+        biometer.calc_temp(player, true)
+        biometer.set_temp(player)
       end
     end
   end
@@ -152,11 +152,11 @@ minetest.register_globalstep(function(dtime)
     for _, player in ipairs(minetest.get_connected_players()) do
       if not minetest.is_creative_enabled(player:get_player_name()) then
         local meta = player:get_meta()
-        local biome = current_biome(player)
+        local biome = biometer.current_biome(player)
         if meta:get_string("bm_cur_biome") ~= biome.name then
           meta:set_string("bm_cur_biome", biome.name)
-          calc_temp(player, true)
-          set_temp(player)
+          biometer.calc_temp(player, true)
+          biometer.set_temp(player)
         end
       end
     end
@@ -165,8 +165,8 @@ minetest.register_globalstep(function(dtime)
     timer_e = 0
     for _, player in ipairs(minetest.get_connected_players()) do
       if not minetest.is_creative_enabled(player:get_player_name()) then
-        calc_temp(player, false)
-        set_temp(player)
+        biometer.calc_temp(player, false)
+        biometer.set_temp(player)
       end
     end
   end

@@ -10,15 +10,21 @@ This mod adds a hydration and temperature system. If you don't want to die, try 
 
 Features:
 
-\- Hydration and temperature system
+&nbsp; - Hydration and temperature system
 
-\- Temperature depends on time of day and altitude
+&nbsp; - Temperature depends on time of day and altitude
 
-\- Nodes that radiate heat/cold
+&nbsp; - Nodes that radiate heat/cold
 
-\- Dehydration
+&nbsp; - Dehydration
 
-\- Death from cold/heat
+&nbsp; - Death from cold/heat
+
+&nbsp; - Open UI with /bm:
+
+&nbsp;   - Multiple temperature scales (Celsius, Fahrenheit, Kelvin)
+
+&nbsp;   - Changeable colors for the Thermometer
 
 
 
@@ -49,6 +55,7 @@ Profile: https://pixabay.com/de/users/u\_m17uwtnjmh-42333415/
 
 
 
-The water bottles/drinking glasses textures are edited textures from their empty variant (out of minetest_game)
+The water bottles/drinking glasses textures are edited textures from their empty variant (out of minetest\_game)
 
-The fill_cauldron and the dispense_water_bottle function are from VoxeLibre.
+The fill\_cauldron and the dispense\_water\_bottle function are from VoxeLibre.
+

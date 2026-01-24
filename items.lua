@@ -158,7 +158,7 @@ if cg == "minetest_game" then
       groups = {vessel = 1, drink = 1, dig_immediate = 3, attached_node = 1},
       sounds = v.sound,
       on_use = function(itemstack, user, pointed_thing)
-        set_hydr_bar(user, true, v.reg)
+        biometer.set_hydr_bar(user, true, v.reg)
         minetest.sound_play("biometer_drinking", {to_player = user:get_player_name(), gain = 0.5})
         itemstack = ItemStack(v.par)
 
@@ -172,7 +172,7 @@ if cg == "minetest_game" then
       on_use = function(itemstack, user, pointed_thing)
         local player_inv = user:get_inventory()
 
-        set_hydr_bar(user, true, v.reg)
+        biometer.set_hydr_bar(user, true, v.reg)
         minetest.sound_play("biometer_drinking", {to_player = user:get_player_name(), gain = 0.5})
 
         if itemstack:get_count() > 1 then
@@ -268,7 +268,7 @@ else
             local held_for = (minetest.get_us_time() - start_time) / 1e6
 
             if held_for >= 1.6 then
-              set_hydr_bar(user, true, v.reg)
+              biometer.set_hydr_bar(user, true, v.reg)
               allow_place_timer(player_name)
               return itemstack
             end
@@ -323,7 +323,7 @@ else
   	end,
   	on_step = function(dtime, object, factor, duration)
       if object:is_player() then
-  		  set_hydr_bar(object, true, factor)
+  		  biometer.set_hydr_bar(object, true, factor)
       end
   	end,
   	particle_color = "#14099C",

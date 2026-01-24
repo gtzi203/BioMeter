@@ -1,6 +1,7 @@
 
 --functions
 
+biometer = {}
 bm = {}
 
 local S = minetest.get_translator(minetest.get_current_modname())
@@ -20,7 +21,7 @@ local temp_y_down_max = 600
 
 bm.ui_state = {}
 
-function button_action(player)
+function biometer.button_action(player)
   player_name = player:get_player_name()
   if not minetest.is_creative_enabled(player:get_player_name()) then
     minetest.show_formspec(player_name, "biometer:ui", get_ui(player, true))
@@ -29,15 +30,15 @@ function button_action(player)
   end
 end
 
-function current_biome(player)
+function biometer.current_biome(player)
   local biome_data = minetest.get_biome_data(player:get_pos())
 
   return {name = minetest.get_biome_name(biome_data.biome), humidity = biome_data.humidity, heat = biome_data.heat}
 end
 
-function calc_temp(player, base)
+function biometer.calc_temp(player, base)
   local meta = player:get_meta()
-  local biome = current_biome(player)
+  local biome = biometer.current_biome(player)
   local temp_r = 0
 
   if base then
@@ -95,7 +96,7 @@ function calc_temp(player, base)
   end
 end
 
-function update_temp(player, temp)
+function biometer.update_temp(player, temp)
   if not minetest.is_creative_enabled(player:get_player_name()) then
     local meta = player:get_meta()
     local id = ""
@@ -153,7 +154,7 @@ function update_temp(player, temp)
   end
 end
 
-function bm_rgb_to_hex(r, g, b)
+function biometer.rgb_to_hex(r, g, b)
   return string.format("%02X%02X%02X", r, g, b)
 end
 
@@ -166,7 +167,7 @@ function get_rgb(v)
   return r, g, b
 end
 
-function update_ui_ther(player, big, small, update_color)
+function biometer.update_ui_ther(player, big, small, update_color)
   if not minetest.is_creative_enabled(player:get_player_name()) then
     local player_name = player:get_player_name()
     local meta = player:get_meta()
@@ -213,7 +214,7 @@ function update_ui_ther(player, big, small, update_color)
       player:hud_change(id_g_text, "text", g)
       player:hud_change(id_b_text, "text", b)
 
-      set_temp(player)
+      biometer.set_temp(player)
     end
 
     if small then
@@ -242,11 +243,11 @@ function update_ui_ther(player, big, small, update_color)
       player:hud_change(id_g_text, "text", "")
       player:hud_change(id_b_text, "text", "")
 
-      set_temp(player)
+      biometer.set_temp(player)
     end
 
     if update_color then
-      update_ther_color(player, "change")
+      biometer.update_ther_color(player, "change")
 
       r, g, b = get_rgb(meta:get_string("bm_ther_color_change"))
       player:hud_change(id_r_text, "text", r)
@@ -256,7 +257,7 @@ function update_ui_ther(player, big, small, update_color)
   end
 end
 
-function update_ther_color(player, set_as_new)
+function biometer.update_ther_color(player, set_as_new)
   if not minetest.is_creative_enabled(player:get_player_name()) then
     local meta = player:get_meta()
     local id = meta:get_string("bm_temp_dis_ther_inner_id")
@@ -269,12 +270,12 @@ function update_ther_color(player, set_as_new)
       r, g, b = get_rgb(meta:get_string("bm_ther_color_change"))
     end
 
-    player:hud_change(id, "text", "biometer_thermometer_inner.png^[multiply:#"..bm_rgb_to_hex(r, g, b))
-    player:hud_change(id_down, "text", "biometer_thermometer_inner_down.png^[multiply:#"..bm_rgb_to_hex(r, g, b))
+    player:hud_change(id, "text", "biometer_thermometer_inner.png^[multiply:#"..biometer.rgb_to_hex(r, g, b))
+    player:hud_change(id_down, "text", "biometer_thermometer_inner_down.png^[multiply:#"..biometer.rgb_to_hex(r, g, b))
   end
 end
 
-function update_ther_inner(player, temp)
+function biometer.update_ther_inner(player, temp)
   if not minetest.is_creative_enabled(player:get_player_name()) then
     local player_name = player:get_player_name()
     local meta = player:get_meta()
@@ -298,7 +299,7 @@ function update_ther_inner(player, temp)
   end
 end
 
-function set_temp(player, temp)
+function biometer.set_temp(player, temp)
   if not minetest.is_creative_enabled(player:get_player_name()) then
     local meta = player:get_meta()
     local id = meta:get_string("bm_temp_dis_id")
@@ -321,13 +322,13 @@ function set_temp(player, temp)
       end
 
       player:hud_change(id, "text", display_temp .. temp_sym)
-      update_temp(player, temp)
-      update_ther_inner(player, temp)
+      biometer.update_temp(player, temp)
+      biometer.update_ther_inner(player, temp)
     end
   end
 end
 
-function update_hydr(player)
+function biometer.update_hydr(player)
   local meta = player:get_meta()
   local id = meta:get_string("bm_hydr_black_id")
   local current_value = meta:get_int("bm_hydr_bar_value")
@@ -339,7 +340,7 @@ function update_hydr(player)
   end
 end
 
-function set_hydr_bar(player, respawn, value)
+function biometer.set_hydr_bar(player, respawn, value)
   if not minetest.is_creative_enabled(player:get_player_name()) then
     local meta = player:get_meta()
     local temp_base = meta:get_float("bm_temp_base")
@@ -398,6 +399,6 @@ function set_hydr_bar(player, respawn, value)
         meta:set_int("bm_hydr_bar_value", current_value)
       end
     end
-    update_hydr(player)
+    biometer.update_hydr(player)
   end
 end

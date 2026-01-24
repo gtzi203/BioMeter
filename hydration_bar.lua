@@ -48,7 +48,7 @@ minetest.register_on_joinplayer(function(player)
     end
     --meta:set_int("bm_hydr_bar_value", 4)
 
-    set_hydr_bar(player, true)
+    biometer.set_hydr_bar(player, true)
   end
 end)
 
@@ -57,7 +57,7 @@ minetest.register_on_respawnplayer(function(player)
     local meta = player:get_meta()
     meta:set_int("bm_hydr_bar_value", 20)
 
-    set_hydr_bar(player, true)
+    biometer.set_hydr_bar(player, true)
   end
 end)
 
@@ -67,7 +67,7 @@ minetest.register_globalstep(function(dtime)
     timer = 0
     for _, player in ipairs(minetest.get_connected_players()) do
       if not minetest.is_creative_enabled(player:get_player_name()) then
-        set_hydr_bar(player, false)
+        biometer.set_hydr_bar(player, false)
       end
     end
   end
