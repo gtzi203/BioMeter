@@ -1,11 +1,43 @@
 # textdomain: biometer
 
-Hydration=Hydratace
-Temperature in=Teplota v
-Cancel=Zrušit
-Apply Changes=Použít změny
-Set to Default=Obnovit výchozí
 This is only for survival mode=Toto je pouze pro režim přežití
+
+Hydration=Hydratace
+
+Apply Changes=Použít změny
+Confirm=Potvrdit
+Cancel=Zrušit
+Custom=Vlastní
+Set to Default=Obnovit výchozí
+
+Hydration Bar Position=Pozice ukazatele hydratace
+Thermometer Position=Pozice teploměru
+Position=Pozice
+Offset=Posun
+Direction=Směr
+Right=Vpravo
+Left=Vlevo
+
+Temperature in=Teplota v
+Celsius=Celsius
+Fahrenheit=Fahrenheit
+Kelvin=Kelvin
+
+Hotbar-Top-Right=Hotbar-Nahoře-Vpravo
+Hotbar-Top-Left=Hotbar-Nahoře-Vlevo
+Hotbar-Middle-Right=Hotbar-Uprostřed-Vpravo
+Hotbar-Middle-Left=Hotbar-Uprostřed-Vlevo
+Hotbar-Bottom-Right=Hotbar-Dole-Vpravo
+Hotbar-Bottom-Left=Hotbar-Dole-Vlevo
+Hotbar-Right=Hotbar-Vpravo
+Hotbar-Left=Hotbar-Vlevo
+Top-Middle=Nahoře-Uprostřed
+Top-Right=Nahoře-Vpravo
+Top-Left=Nahoře-Vlevo
+Middle-Right=Uprostřed-Vpravo
+Middle-Left=Uprostřed-Vlevo
+Bottom-Right=Dole-Vpravo
+Bottom-Left=Dole-Vlevo
 
 Water Bottle=Láhev s vodou
 River Water Bottle=Láhev s říční vodou
