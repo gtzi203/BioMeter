@@ -10,21 +10,23 @@ This mod adds a hydration and temperature system. If you don't want to die, try 
 
 Features:
 
-&nbsp; - Hydration and temperature system
+  - Hydration and temperature system
 
-&nbsp; - Temperature depends on time of day and altitude
+  - Temperature depends on time of day and altitude
 
-&nbsp; - Nodes that radiate heat/cold
+  - Nodes that radiate heat/cold
 
-&nbsp; - Dehydration
+  - Dehydration
 
-&nbsp; - Death from cold/heat
+  - Death from cold/heat
 
-&nbsp; - Open UI with /bm:
+  - Open UI with /bm:
 
-&nbsp;   - Multiple temperature scales (Celsius, Fahrenheit, Kelvin)
+    - Multiple temperature scales (Celsius, Fahrenheit, Kelvin)
 
-&nbsp;   - Changeable colors for the Thermometer
+    - Changeable colors for the Thermometer
+
+&#x20;   - Changeable poitions for the Hydration Bar and the Thermometer
 
 
 

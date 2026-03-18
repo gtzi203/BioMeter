@@ -11,15 +11,21 @@ local interval_b = 5
 local interval_e = 2
 
 minetest.register_on_joinplayer(function(player)
+  local meta = player:get_meta()
   local player_name = player:get_player_name()
+
+  local default_ther_pos = bm.ther_pos[cg][bm.ther_pos[cg].default_pos].pos
+
+  meta:set_string("bm_ther_pos", meta:get_string("bm_ther_pos") ~= "" and meta:get_string("bm_ther_pos") or default_ther_pos)
+  meta:set_string("bm_ther_pos_old", meta:get_string("bm_ther_pos_old") ~= "" and meta:get_string("bm_ther_pos_old") or default_ther_pos)
+
+  bm.ui_state[player_name] = {ther_off_x = -100, ther_off_y = 0, ther_scale_max = 8}
+
+  --meta:set_string("bm_ther_pos", default_ther_pos)
+  --meta:set_string("bm_ther_pos_old", default_ther_pos)
+
   if not minetest.is_creative_enabled(player_name) then
     local meta = player:get_meta()
-    alignments = {
-      [1] = {alignment = "left", pos = {x = 0, y = 0}, ofs = {x = 1, y = 1}, rot = 0},
-      [2] = {alignment = "right", pos = {x = 1, y = 0}, ofs = {x = -1, y = 1}, rot = 0},
-      [3] = {alignment = "left", pos = {x = 1, y = 1}, ofs = {x = -1, y = -1}, rot = 180},
-      [4] = {alignment = "right", pos = {x = 0, y = 1}, ofs = {x = 1, y = -1}, rot = 180}
-    }
     local id_ther_heat = {}
     local id_ther_freeze = {}
     local id_cur_heat = ""
@@ -27,8 +33,8 @@ minetest.register_on_joinplayer(function(player)
 
     local id = player:hud_add({
       hud_elem_type = "text",
-      position = {x = 1, y = 1},
-      offset = {x = -100, y = -255},
+      position = {x = 0, y = 0},
+      offset = {x = 0, y = 0},
       text = "--°?",
       alignment = {x = 0, y = 0},
       scale = {x = 0, y = 0},
@@ -37,8 +43,8 @@ minetest.register_on_joinplayer(function(player)
     })
     local id_ther = player:hud_add({
       hud_elem_type = "image",
-      position = {x = 1, y = 1},
-      offset = {x = -100, y = -125},
+      position = {x = 0, y = 0},
+      offset = {x = 0, y = 0},
       text = "biometer_thermometer_"..cg..".png",
       alignment = {x = 0, y = 0},
       scale = {x = 8, y = 8},
@@ -46,8 +52,8 @@ minetest.register_on_joinplayer(function(player)
     })
     local id_ther_inner_down = player:hud_add({
       hud_elem_type = "image",
-      position = {x = 1, y = 1},
-      offset = {x = -100, y = -125},
+      position = {x = 0, y = 0},
+      offset = {x = 0, y = 0},
       text = "biometer_thermometer_inner_down.png^[multiply:#FFFFFF",
       alignment = {x = 0, y = 0},
       scale = {x = 8, y = 8},
@@ -55,14 +61,52 @@ minetest.register_on_joinplayer(function(player)
     })
     local id_ther_inner = player:hud_add({
       hud_elem_type = "image",
-      position = {x = 1, y = 1},
-      offset = {x = -100, y = -125},
+      position = {x = 0, y = 0},
+      offset = {x = 0, y = 0},
       text = "biometer_thermometer_inner.png^[multiply:#FFFFFF",
       alignment = {x = 0, y = 0},
       scale = {x = 8, y = 0},
       z_index = 3
     })
-    for k, v in pairs(alignments) do
+    local id_big = player:hud_add({
+      hud_elem_type = "text",
+      position = {x = 9999, y = 9999},
+      offset = {x = -747, y = -805},
+      text = "--?°",
+      alignment = {x = 0, y = 0},
+      scale = {x = 0, y = 0},
+      size = {x = 2, y = 2},
+      number = 0xFFFFFF,
+      z_index = 10003
+    })
+    local id_ther_big = player:hud_add({
+      hud_elem_type = "image",
+      position = {x = 9999, y = 9999},
+      offset = {x = -747, y = -550},
+      text = "biometer_thermometer_"..cg..".png^[opacity:255",
+      alignment = {x = 0, y = 0},
+      scale = {x = 16, y = 16},
+      z_index = 10003
+    })
+    local id_ther_big_inner_down = player:hud_add({
+      hud_elem_type = "image",
+      position = {x = 9999, y = 9999},
+      offset = {x = -747, y = -550},
+      text = "biometer_thermometer_inner_down.png^[multiply:#FFFFFF^[opacity:255",
+      alignment = {x = 0, y = 0},
+      scale = {x = 16, y = 16},
+      z_index = 10002
+    })
+    local id_ther_big_inner = player:hud_add({
+      hud_elem_type = "image",
+      position = {x = 9999, y = 9999},
+      offset = {x = -747, y = -550},
+      text = "biometer_thermometer_inner.png^[multiply:#FFFFFF^[opacity:255",
+      alignment = {x = 0, y = 0},
+      scale = {x = 16, y = 16},
+      z_index = 10001
+    })
+    for k, v in pairs(bm.hud_alignments) do
       id_cur_heat = player:hud_add({
         hud_elem_type = "image",
         position = {x = 0 + v.pos.x, y = 0 + v.pos.y},
@@ -98,11 +142,16 @@ minetest.register_on_joinplayer(function(player)
       text = "biometer_thermometer_freeze.png^[opacity:0",
       z_index = 1
     })
+
     meta:set_string("bm_cur_biome", biometer.current_biome(player).name)
     meta:set_string("bm_temp_dis_id", id)
     meta:set_string("bm_temp_dis_ther_id", id_ther)
     meta:set_string("bm_temp_dis_ther_inner_id", id_ther_inner)
     meta:set_string("bm_temp_dis_ther_inner_down_id", id_ther_inner_down)
+    meta:set_string("bm_temp_dis_big_id", id_big)
+    meta:set_string("bm_temp_dis_big_ther_id", id_ther_big)
+    meta:set_string("bm_temp_dis_big_ther_inner_id", id_ther_big_inner)
+    meta:set_string("bm_temp_dis_big_ther_inner_down_id", id_ther_big_inner_down)
     meta:set_string("bm_ther_heat_id", id_ther_heat)
     meta:set_string("bm_ther_freeze_id", id_ther_freeze)
     meta:set_string("bm_do_temp_dmg", "false")
@@ -111,9 +160,10 @@ minetest.register_on_joinplayer(function(player)
     meta:set_string("bm_ther_color", meta:get_string("bm_ther_color") ~= "" and meta:get_string("bm_ther_color") or "196, 0, 0")
     meta:set_string("bm_ther_color_change", meta:get_string("bm_ther_color_change") ~= "" and meta:get_string("bm_ther_color_change") or "196, 0, 0")
 
-    bm.ui_state[player_name] = {ther_off_x = -100, ther_off_y = 0, ther_scale_max = 8}
-
+    biometer.calc_temp(player, true)
     biometer.set_temp(player)
+    biometer.update_ther_pos(player)
+    biometer.update_ui_ther(player, false, true, false)
     biometer.update_ther_color(player)
   end
 end)

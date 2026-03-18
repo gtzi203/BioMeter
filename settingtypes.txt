@@ -1,0 +1,15 @@
+
+[biometer]
+
+[Hydration]
+
+# Low hydration deals damage to the player.
+biometer.hydration_damage (Hydration Damage) bool true
+
+[Temperature]
+
+# Too much heat deals damage to the player.
+biometer.heat_damage (Heat Damage) bool true
+
+# Too much cold deals damage to the player.
+biometer.freeze_damage (Freeze Damage) bool true

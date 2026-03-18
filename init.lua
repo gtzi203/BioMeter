@@ -43,8 +43,8 @@ if inner_freeze then
 end
 
 dofile(modpath .. "/functions.lua")
+dofile(modpath .. "/ui.lua")
 dofile(modpath .. "/hydration_bar.lua")
 dofile(modpath .. "/temperature_display.lua")
 dofile(modpath .. "/items.lua")
 dofile(modpath .. "/crafting.lua")
-dofile(modpath .. "/ui.lua")
