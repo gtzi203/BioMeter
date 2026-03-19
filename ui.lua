@@ -5,6 +5,15 @@ local S = minetest.get_translator(minetest.get_current_modname())
 
 local index = {}
 
+local function hud_add(player, hud)
+	local hud_style = core.has_feature("hud_def_type_field")
+	if hud_style and hud["hud_elem_type"] then
+		hud["type"] = hud["hud_elem_type"]
+		hud["hud_elem_type"] = nil
+	end
+	return player:hud_add(hud)
+end
+
 minetest.register_chatcommand("bm", {
   description = "Opens the BM UI.",
   func = function(name, param)
@@ -115,7 +124,7 @@ end
 minetest.register_on_joinplayer(function(player)
   if not minetest.is_creative_enabled(player:get_player_name()) then
     local meta = player:get_meta()
-    local id_bg = player:hud_add({
+    local id_bg = hud_add(player, {
       hud_elem_type = "image",
       position = {x = 0.5, y = 0.5},
       offset = {x = 0, y = 0},
@@ -125,7 +134,7 @@ minetest.register_on_joinplayer(function(player)
       z_index = 9999
     })
 
-    local id_r_text = player:hud_add({
+    local id_r_text = hud_add(player, {
       hud_elem_type = "text",
       position = {x = 0.5, y = 0.5},
       offset = {x = -38, y = -225}, --20 -233
@@ -136,7 +145,7 @@ minetest.register_on_joinplayer(function(player)
       z_index = 10000
     })
 
-    local id_g_text = player:hud_add({
+    local id_g_text = hud_add(player, {
       hud_elem_type = "text",
       position = {x = 0.5, y = 0.5},
       offset = {x = -38, y = -160},
@@ -147,7 +156,7 @@ minetest.register_on_joinplayer(function(player)
       z_index = 10000
     })
 
-    local id_b_text = player:hud_add({
+    local id_b_text = hud_add(player, {
       hud_elem_type = "text",
       position = {x = 0.5, y = 0.5},
       offset = {x = -38, y = -95},
