@@ -26,7 +26,7 @@ Features:
 
     - Changeable colors for the Thermometer
 
-&#x20;   - Changeable poitions for the Hydration Bar and the Thermometer
+&#x20;   - Changeable positions for the Hydration Bar and the Thermometer
 
 
 
