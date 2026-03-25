@@ -6,6 +6,15 @@ local S = minetest.get_translator(minetest.get_current_modname())
 local timer = 0
 local interval = 2
 
+local function hud_add(player, hud)
+	local hud_style = core.has_feature("hud_def_type_field")
+	if hud_style and hud["hud_elem_type"] then
+		hud["type"] = hud["hud_elem_type"]
+		hud["hud_elem_type"] = nil
+	end
+	return player:hud_add(hud)
+end
+
 --[[if minetest.get_modpath("hudbars") then
   hb.register_hudbar("biometer.hydr_bar", 0xFFFFFF, S("Hydration Bar"), {icon = "biometer_hydr_bar_icon.png", bgicon = "biomter_hydr_bar_bg_icon.png", bar = "biometer_hydr_bar_bg.png"}, 20, 20, false, nil, {order = { "label", "value", "max_value"}})
 end--]]
@@ -33,7 +42,7 @@ minetest.register_on_joinplayer(function(player)
     end
 
     --if not minetest.get_modpath("hudbars") then
-      id = player:hud_add({
+      id = hud_add(player, {
         hud_elem_type = "statbar",
         position = {x = 0, y = 0},
         offset = {x = 0, y = 0},
@@ -48,7 +57,7 @@ minetest.register_on_joinplayer(function(player)
     --[[else
       hb.init_hudbar(player, "biometer.hydr_bar", 20, 20, false)
     end--]]
-    local id_hydr_black = player:hud_add({
+    local id_hydr_black = hud_add(player, {
       hud_elem_type = "image",
       position = {x = 0.5, y = 0.5},
       scale = {x = -100, y = -100},
