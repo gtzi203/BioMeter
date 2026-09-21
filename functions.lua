@@ -6,9 +6,13 @@ bm = {}
 
 local S = minetest.get_translator(minetest.get_current_modname())
 
-local hydration_damage = minetest.settings:get_bool("biometer.hydration_damage") ~= false
-local heat_damage = minetest.settings:get_bool("biometer.heat_damage") ~= false
-local freeze_damage = minetest.settings:get_bool("biometer.freeze_damage") ~= false
+local deal_hydration_damage = minetest.settings:get_bool("biometer.deal_hydration_damage") ~= false
+local deal_heat_damage = minetest.settings:get_bool("biometer.deal_heat_damage") ~= false
+local deal_freeze_damage = minetest.settings:get_bool("biometer.deal_freeze_damage") ~= false
+
+local hydration_damage = minetest.settings:get("biometer.hydration_damage") or 3
+local heat_damage = minetest.settings:get("biometer.heat_damage") or 4
+local freeze_damage = minetest.settings:get("biometer.freeze_damage") or 4
 
 local decimal = 10 ^ 1
 local radius = 2
@@ -213,9 +217,11 @@ function biometer.update_hydr_bar_pos(player)
   local id = meta:get_string("bm_hydr_bar_id")
   local hydr_bar = biometer.get_pos_from_string(meta:get_string("bm_hydr_bar_pos"))
 
-  player:hud_change(id, "position", {x = hydr_bar.pos.x, y = hydr_bar.pos.y})
-  player:hud_change(id, "offset", {x = hydr_bar.offset.x, y = hydr_bar.offset.y})
-  player:hud_change(id, "direction", hydr_bar.direction)
+  if hydr_bar then
+    player:hud_change(id, "position", {x = hydr_bar.pos.x, y = hydr_bar.pos.y})
+    player:hud_change(id, "offset", {x = hydr_bar.offset.x, y = hydr_bar.offset.y})
+    player:hud_change(id, "direction", hydr_bar.direction)
+  end
 end
 
 function biometer.update_ther_pos(player)
@@ -286,10 +292,10 @@ function biometer.update_temp(player, temp)
       if meta:get_string("bm_do_temp_dmg") == "false" then
         local hp = player:get_hp()
 
-        if temp > 0 and heat_damage then
-          player:set_hp(hp - 4)
-        elseif temp < 0 and freeze_damage then
-          player:set_hp(hp - 4)
+        if temp > 0 and deal_heat_damage then
+          player:set_hp(hp - heat_damage)
+        elseif temp < 0 and deal_freeze_damage then
+          player:set_hp(hp - freeze_damage)
         end
       end
     else
@@ -570,8 +576,8 @@ function biometer.set_hydr_bar(player, respawn, value)
     elseif current_value < 2 and not respawn and not value then
       local hp = player:get_hp()
 
-      if hydration_damage then
-        player:set_hp(hp - 3)
+      if deal_hydration_damage then
+        player:set_hp(hp - hydration_damage)
       end
     elseif respawn and not value then
       player:hud_change(id, "number", current_value)
