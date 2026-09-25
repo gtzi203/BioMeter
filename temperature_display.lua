@@ -10,6 +10,15 @@ local interval_n = 20
 local interval_b = 5
 local interval_e = 2
 
+local function hud_add(player, hud)
+	local hud_style = core.has_feature("hud_def_type_field")
+	if hud_style and hud["hud_elem_type"] then
+		hud["type"] = hud["hud_elem_type"]
+		hud["hud_elem_type"] = nil
+	end
+	return player:hud_add(hud)
+end
+
 minetest.register_on_joinplayer(function(player)
   local meta = player:get_meta()
   local player_name = player:get_player_name()
@@ -31,7 +40,7 @@ minetest.register_on_joinplayer(function(player)
     local id_cur_heat = ""
     local id_cur_freeze = ""
 
-    local id = player:hud_add({
+    local id = hud_add(player, {
       hud_elem_type = "text",
       position = {x = 0, y = 0},
       offset = {x = 0, y = 0},
@@ -41,7 +50,7 @@ minetest.register_on_joinplayer(function(player)
       number = 0xFFFFFF,
       z_index = 5
     })
-    local id_ther = player:hud_add({
+    local id_ther = hud_add(player, {
       hud_elem_type = "image",
       position = {x = 0, y = 0},
       offset = {x = 0, y = 0},
@@ -50,7 +59,7 @@ minetest.register_on_joinplayer(function(player)
       scale = {x = 8, y = 8},
       z_index = 5
     })
-    local id_ther_inner_down = player:hud_add({
+    local id_ther_inner_down = hud_add(player, {
       hud_elem_type = "image",
       position = {x = 0, y = 0},
       offset = {x = 0, y = 0},
@@ -59,7 +68,7 @@ minetest.register_on_joinplayer(function(player)
       scale = {x = 8, y = 8},
       z_index = 4
     })
-    local id_ther_inner = player:hud_add({
+    local id_ther_inner = hud_add(player, {
       hud_elem_type = "image",
       position = {x = 0, y = 0},
       offset = {x = 0, y = 0},
@@ -68,7 +77,7 @@ minetest.register_on_joinplayer(function(player)
       scale = {x = 8, y = 0},
       z_index = 3
     })
-    local id_big = player:hud_add({
+    local id_big = hud_add(player, {
       hud_elem_type = "text",
       position = {x = 9999, y = 9999},
       offset = {x = -747, y = -805},
@@ -79,7 +88,7 @@ minetest.register_on_joinplayer(function(player)
       number = 0xFFFFFF,
       z_index = 10003
     })
-    local id_ther_big = player:hud_add({
+    local id_ther_big = hud_add(player, {
       hud_elem_type = "image",
       position = {x = 9999, y = 9999},
       offset = {x = -747, y = -550},
@@ -88,7 +97,7 @@ minetest.register_on_joinplayer(function(player)
       scale = {x = 16, y = 16},
       z_index = 10003
     })
-    local id_ther_big_inner_down = player:hud_add({
+    local id_ther_big_inner_down = hud_add(player, {
       hud_elem_type = "image",
       position = {x = 9999, y = 9999},
       offset = {x = -747, y = -550},
@@ -97,7 +106,7 @@ minetest.register_on_joinplayer(function(player)
       scale = {x = 16, y = 16},
       z_index = 10002
     })
-    local id_ther_big_inner = player:hud_add({
+    local id_ther_big_inner = hud_add(player, {
       hud_elem_type = "image",
       position = {x = 9999, y = 9999},
       offset = {x = -747, y = -550},
@@ -107,7 +116,7 @@ minetest.register_on_joinplayer(function(player)
       z_index = 10001
     })
     for k, v in pairs(bm.hud_alignments) do
-      id_cur_heat = player:hud_add({
+      id_cur_heat = hud_add(player, {
         hud_elem_type = "image",
         position = {x = 0 + v.pos.x, y = 0 + v.pos.y},
         offset = {x = 216 * v.ofs.x, y = 216 * v.ofs.y},
@@ -116,7 +125,7 @@ minetest.register_on_joinplayer(function(player)
         scale = {x = 9, y = 9},
         z_index = 2
       })
-      id_cur_heat = player:hud_add({
+      id_cur_heat = hud_add(player, {
         hud_elem_type = "image",
         position = {x = 0 + v.pos.x, y = 0 + v.pos.y},
         offset = {x = 216 * v.ofs.x, y = 216 * v.ofs.y},
@@ -128,14 +137,14 @@ minetest.register_on_joinplayer(function(player)
       meta:set_string("bm_heat_"..k.."_id", id_cur_heat)
       meta:set_string("bm_freeze_"..k.."_id", id_cur_heat)
     end
-    id_ther_heat = player:hud_add({
+    id_ther_heat = hud_add(player, {
       hud_elem_type = "image",
       position = {x = 0.5, y = 0.5},
       scale = {x = -100, y = -100},
       text = "biometer_thermometer_heat.png^[opacity:0",
       z_index = 1
     })
-    id_ther_freeze = player:hud_add({
+    id_ther_freeze = hud_add(player, {
       hud_elem_type = "image",
       position = {x = 0.5, y = 0.5},
       scale = {x = -100, y = -100},
