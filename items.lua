@@ -3,7 +3,7 @@
 
 local S = minetest.get_translator(minetest.get_current_modname())
 
-if biometer.cg == "minetest_game" and minetest.get_modpath("vessels") then
+if biometer.cg == "minetest_game" then
     local water_types = {
         ["default:water_source"] = "water",
         ["default:water_flowing"] = "water",
@@ -69,27 +69,29 @@ if biometer.cg == "minetest_game" and minetest.get_modpath("vessels") then
         sounds = default.node_sound_wood_defaults(),
     })
 
-    for name, type in pairs(bottles_override) do
-        minetest.override_item(name ,{
-            liquids_pointable = true,
-            on_use = function(itemstack, user, pointed_thing)
-                if pointed_thing.type ~= "node" then
-                    return
+    if minetest.get_modpath("vessels") then
+        for name, type in pairs(bottles_override) do
+            minetest.override_item(name ,{
+                liquids_pointable = true,
+                on_use = function(itemstack, user, pointed_thing)
+                    if pointed_thing.type ~= "node" then
+                        return
+                    end
+
+                    local node_name = minetest.get_node(pointed_thing.under).name
+
+                    local water = water_types[node_name]
+
+                    if not water then
+                        return itemstack
+                    end
+
+                    minetest.sound_play("biometer_water", {to_player = user:get_player_name(), gain = 1.4})
+
+                    return biometer.add_item_to_player(user, ItemStack("biometer:" .. type .. "_with_" .. water), itemstack)
                 end
-
-                local node_name = minetest.get_node(pointed_thing.under).name
-
-                local water = water_types[node_name]
-
-                if not water then
-                    return itemstack
-                end
-
-                minetest.sound_play("biometer_water", {to_player = user:get_player_name(), gain = 1.4})
-
-                return biometer.add_item_to_player(user, ItemStack("biometer:" .. type .. "_with_" .. water), itemstack)
-            end
-        })
+            })
+        end
     end
 
     for name, def in pairs(drinking_bottles) do
@@ -115,20 +117,22 @@ if biometer.cg == "minetest_game" and minetest.get_modpath("vessels") then
         })
     end
 
-    for name, regenerate in pairs(get_drinks_override_list()) do
-        local on_use = minetest.registered_items[name].on_use
+    if minetest.get_modpath("drinks") then
+        for name, regenerate in pairs(get_drinks_override_list()) do
+            local on_use = minetest.registered_items[name].on_use
 
-        minetest.override_item(name ,{
-            on_use = function(itemstack, user, pointed_thing)
-                biometer.set_hydr(user, biometer.get_hydr(user:get_player_name()) + regenerate, false, true)
+            minetest.override_item(name ,{
+                on_use = function(itemstack, user, pointed_thing)
+                    biometer.set_hydr(user, biometer.get_hydr(user:get_player_name()) + regenerate, false, true)
 
-                if on_use then
-                    on_use(itemstack, user, pointed_thing)
-                end
-            end 
-        })
+                    if on_use then
+                        on_use(itemstack, user, pointed_thing)
+                    end
+                end 
+            })
+        end
     end
-else
+elseif biometer.cg == "mineclone" then
     local bottles_override = {
         ["mcl_potions:water"] = {regenerate = 3, parent = "mcl_potions:glass_bottle"},
         ["mcl_potions:river_water"] = {regenerate = 4, parent = "mcl_potions:glass_bottle"}
