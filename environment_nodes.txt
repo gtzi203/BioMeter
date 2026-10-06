@@ -1,5 +1,6 @@
 minetest_game = [
   heat = {
+    biometer:test_heat (150),
     fire:basic_flame (20),
     fire:permanent_flame (20),
     default:lava_source (25),
@@ -10,6 +11,7 @@ minetest_game = [
   }
 
   freeze = {
+    biometer:test_freeze (-40),
     default:snow (-0.3),
     default:snowblock (-0.3),
     default:dirt_with_snow (-0.05)
@@ -22,6 +24,7 @@ minetest_game = [
 
 mineclone = [
   heat = {
+    biometer:test_heat (150),
     mcl_fire:fire (20),
     mcl_fire:eternal_fire (20),
     mcl_blackstone:soul_fire (17),
@@ -45,6 +48,7 @@ mineclone = [
   }
 
   freeze = {
+    biometer:test_freeze (-40),
     mcl_core:snow (-0.3),
     mcl_core:snow_2 (-0.3),
     mcl_core:snow_3 (-0.3),

@@ -3,90 +3,87 @@
 
 local S = minetest.get_translator(minetest.get_current_modname())
 
-local timer = 0
-local interval = 2
-
---[[if minetest.get_modpath("hudbars") then
-  hb.register_hudbar("biometer.hydr_bar", 0xFFFFFF, S("Hydration Bar"), {icon = "biometer_hydr_bar_icon.png", bgicon = "biomter_hydr_bar_bg_icon.png", bar = "biometer_hydr_bar_bg.png"}, 20, 20, false, nil, {order = { "label", "value", "max_value"}})
-end--]]
+local HYDR_UPDATE_INTERVAL = tonumber(minetest.settings:get("biometer.hydr_update_interval") or 8)
+local HYDR_DAMAGE_INTERVAL = tonumber(minetest.settings:get("biometer.hydr_damage_interval") or 2)
 
 minetest.register_on_joinplayer(function(player)
-  if not minetest.is_creative_enabled(player:get_player_name()) then
-    local meta = player:get_meta()
-    local hydr_bar_value = meta:get_int("bm_hydr_bar_value")
-    local id = nil
+    local player_name = player:get_player_name()
 
-    local default_hydr_bar_pos = bm.hydr_bar_pos[cg][bm.hydr_bar_pos[cg].default_pos].pos
+    local settings = biometer.get_settings(player_name)
 
-    meta:set_string("bm_hydr_bar_pos", meta:get_string("bm_hydr_bar_pos") ~= "" and meta:get_string("bm_hydr_bar_pos") or default_hydr_bar_pos)
-    meta:set_string("bm_hydr_bar_pos_old", meta:get_string("bm_hydr_bar_pos_old") ~= "" and meta:get_string("bm_hydr_bar_pos_old") or default_hydr_bar_pos)
-
-    --meta:set_string("bm_hydr_bar_pos", default_hydr_bar_pos)
-    --meta:set_string("bm_hydr_bar_pos_old", default_hydr_bar_pos)
-
-    local hydr_bar = biometer.get_pos_from_string(meta:get_string("bm_hydr_bar_pos"))
-
-    local text2 = ""
-
-    if cg == "mineclone" then
-      text2 = "biometer_hydration_icon_black_mineclone.png"
+    if not settings then
+        return
     end
 
-    --if not minetest.get_modpath("hudbars") then
-      id = player:hud_add({
-        hud_elem_type = "statbar",
-        position = {x = 0, y = 0},
-        offset = {x = 0, y = 0},
-        text = "biometer_hydration_icon_"..cg..".png",
-        text2 = text2,
-        number = 20,
-        item = 20,
-        direction = 0,
-        size = {x = 24, y = 24},
-        z_index = 0
-      })
-    --[[else
-      hb.init_hudbar(player, "biometer.hydr_bar", 20, 20, false)
-    end--]]
-    local id_hydr_black = player:hud_add({
-      hud_elem_type = "image",
-      position = {x = 0.5, y = 0.5},
-      scale = {x = -100, y = -100},
-      text = "biometer_hydration_black.png^[opacity:0",
-      z_index = 9999
-    })
+    biometer.set_hydr(player, settings.SAVEDhydr, false, true)
 
-    meta:set_string("bm_hydr_bar_id", id)
-    meta:set_string("bm_hydr_black_id", id_hydr_black)
-    if hydr_bar_value > 0 then
-      meta:set_int("bm_hydr_bar_value", meta:get_int("bm_hydr_bar_value"))
-    else
-      meta:set_int("bm_hydr_bar_value", 20)
-    end
-    --meta:set_int("bm_hydr_bar_value", 4)
+    biometer.player_hydr_bar_huds[player_name] = false
 
-    biometer.update_hydr_bar_pos(player)
-    biometer.set_hydr_bar(player, true)
-  end
+    minetest.after(0.5, function()
+        local id_hydr_bar = player:hud_add({
+            hud_elem_type = "statbar",
+            position = {x = 0, y = 0},
+            offset = {x = 0, y = 0},
+            text = "biometer_hydration_icon_" .. biometer.cg .. ".png",
+            text2 = (biometer.cg == "mineclone" and "biometer_hydration_icon_black_mineclone.png") or "",
+            number = biometer.HYDR_BAR_SIZE,
+            item = biometer.HYDR_BAR_SIZE,
+            direction = 0,
+            size = {x = 24, y = 24},
+            z_index = -1
+        })
+
+        local id_hydr_hud_bg = player:hud_add({
+            hud_elem_type = "image",
+            position = {x = 0.5, y = 0.5},
+            offset = {x = 0, y = 0},
+            text = "",
+            alignment = {x = 0, y = 0},
+            scale = {x = 0, y = 0},
+            z_index = 1001
+        })
+
+        biometer.player_hydr_bar_huds[player_name] = {hydr_bar = id_hydr_bar, hydr_hud_bg = id_hydr_hud_bg}
+
+        biometer.update_hydr_bar(player)
+    end)
 end)
 
-minetest.register_on_respawnplayer(function(player)
-  if not minetest.is_creative_enabled(player:get_player_name()) then
-    local meta = player:get_meta()
-    meta:set_int("bm_hydr_bar_value", 20)
-
-    biometer.set_hydr_bar(player, true)
-  end
-end)
+local count = 0
+local damage_count = 0
 
 minetest.register_globalstep(function(dtime)
-  timer = timer + dtime
-  if timer >= interval then
-    timer = 0
-    for _, player in ipairs(minetest.get_connected_players()) do
-      if not minetest.is_creative_enabled(player:get_player_name()) then
-        biometer.set_hydr_bar(player, false)
-      end
+    count = count + dtime
+    damage_count = damage_count + dtime
+
+    if count >= HYDR_UPDATE_INTERVAL then
+        for _, player in ipairs(minetest.get_connected_players()) do
+            local player_name = player:get_player_name()
+            
+            local hydr = biometer.calc_hydr(biometer.get_temp(player_name))
+
+            biometer.add_hydr(player, -hydr)
+        end
+
+        count = 0
     end
-  end
+
+    if damage_count >= HYDR_DAMAGE_INTERVAL then
+        for _, player in ipairs(minetest.get_connected_players()) do
+            biometer.deal_hydr_damage(player)
+        end
+
+        damage_count = 0
+    end
+end)
+
+--it only works sometimes, so i just set it every time in set_hydr()
+--[[minetest.register_on_leaveplayer(function(player)
+    local player_name = player:get_player_name()
+
+    biometer.set_settings(player_name, {["SAVEDhydr"] = biometer.get_hydr(player_name)})
+end)--]]
+
+minetest.register_on_respawnplayer(function(player)
+    biometer.set_hydr(player, biometer.HYDR_BAR_SIZE, false, true)
 end)

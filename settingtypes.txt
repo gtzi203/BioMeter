@@ -4,21 +4,55 @@
 [Hydration]
 
 # Low hydration deals damage to the player.
-biometer.deal_hydration_damage (Deal Hydration Damage) bool true
+biometer.deal_hydr_damage (Deal Hydration Damage) bool true
+
+# At what state of hydration should the player be damaged. (in Health Points)
+biometer.deal_hydr_damage_at (Deal Hydration Damage At) int 3 0 20
 
 # How much damage should dehydration deal to the player.
-biometer.hydration_damage (Hydration Damage) int 3 0 100
+biometer.hydr_damage (Hydration Damage) int 1 0 100
 
 [Temperature]
 
 # Too much heat deals damage to the player.
 biometer.deal_heat_damage (Deal Heat Damage) bool true
 
+# At what (positive) temperature should the player get damaged. (in Celsius)
+biometer.deal_heat_damage_at (Deal Heat Damage At) float 150.0 0.0 500.0
+
 # How much damage should heat deal to the player.
-biometer.heat_damage (Heat Damage) int 4 0 100
+biometer.heat_damage (Heat Damage) int 2 0 100
 
 # Too much cold deals damage to the player.
 biometer.deal_freeze_damage (Deal Freeze Damage) bool true
 
+# At what (negative) temperature should the player get damaged. (in Celsius)
+biometer.deal_freeze_damage_at (Deal Freeze Damage At) float -20.0 -500.0 -0.1
+
 # How much damage should cold deal to the player.
-biometer.freeze_damage (Freeze Damage) int 4 0 100
+biometer.freeze_damage (Freeze Damage) int 1 0 100
+
+[Environment Nodes]
+
+# These nodes affect the player (can be changed in environment_nodes.txt).
+biometer.env_nodes (Environment Nodes) bool true
+
+# Radius in that an environment node effects the player (affect depends on the distance from the player to the node).
+biometer.env_node_radius (Environment Nodes Radius) int 5 0 100
+
+[Advanced]
+
+# How often the hydration bar should be calculated.
+biometer.hydr_update_interval (Hydration Update Interval) float 8.0 0.1 50.0
+
+# How often the temperature should be calculated.
+biometer.temp_update_interval (Temperature Update Interval) float 0.1 0.1 10.0
+
+# How often should the player get hydration damage.
+biometer.hydr_damage_interval (Hydration Damage Interval) float 2.0 0.0 10.0
+
+# How often should the player get temperature damage.
+biometer.temp_damage_interval (Temperature Damage Interval) float 2.0 0.0 10.0
+
+# Test hud can be opened with /biometer_test (This might take some extra memory).
+biometer.init_test_hud (Initialize Test Hud) bool false

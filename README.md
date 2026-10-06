@@ -12,21 +12,27 @@ Features:
 
   - Hydration and temperature system
 
-  - Temperature depends on time of day and altitude
-
-  - Nodes that radiate heat/cold
+  - Temperature depends on the biome, you are in, the nodes around you, the time and your altitude
 
   - Dehydration
 
   - Death from cold/heat
 
-  - Open UI with /bm:
+  - Bowls with water (and other vessels) for hydration
 
-    - Multiple temperature scales (Celsius, Fahrenheit, Kelvin)
+  - Editor; open with /biometer or /bm:
+
+    - Multiple temperature scales (Celsius, Fahrenheit, Kelvin, Rankine and Réaumur)
 
     - Changeable colors for the Thermometer
 
-&#x20;   - Changeable positions for the Hydration Bar and the Thermometer
+    - Changeable poitions for the Hydration Bar and the Temperature Display
+
+
+
+Documentation:
+
+    See API_DOC.txt (in progress)
 
 
 
