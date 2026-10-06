@@ -1,22 +1,60 @@
 # textdomain: biometer
 
-Hydration=Nawodnienie
-Temperature in=Temperatura w
-Cancel=Anuluj
-Apply Changes=Zastosuj zmiany
-Set to Default=Przywróć domyślne
-This is only for survival mode=To jest tylko dla trybu przetrwania
-
-Water Bottle=Butelka wody
-River Water Bottle=Butelka wody rzecznej
-Drinking Glass with Water=Szklanka wody
-Drinking Glass with River Water=Szklanka wody rzecznej
+Bottle with Water=Butelka z wodą
+Bottle with River Water=Butelka z wodą rzeczną
+Drinking Glass with Water=Szklanka z wodą
+Drinking Glass with River Water=Szklanka z wodą rzeczną
 Heavy Steel Bottle with Water=Ciężka stalowa butelka z wodą
 Heavy Steel Bottle with River Water=Ciężka stalowa butelka z wodą rzeczną
 Bowl=Miska
 Bowl with Water=Miska z wodą
 Bowl with River Water=Miska z wodą rzeczną
 
-Water=Woda
-River Water=Woda rzeczna
-Bowls with @1 can be used to fill cauldrons=Miski z @1 mogą być używane do napełniania kotłów
+Regenerates @1 hydration=Przywraca @1 nawodnienia
+
+BioMeter Editor=Edytor BioMeter
+
+Apply Changes=Zastosuj zmiany
+Confirm=Potwierdź
+Cancel=Anuluj
+Set to Default=Przywróć domyślne
+Custom=Niestandardowe
+
+Hydration Bar Position=Pozycja paska nawodnienia
+Thermometer Position=Pozycja termometru
+Temperature in=Temperatura w
+
+Hydration Bar=Pasek nawodnienia
+Temeperature Display=Wyświetlanie temperatury
+
+X-Position=Pozycja X
+Y-Position=Pozycja Y
+X-Offset=Przesunięcie X
+Y-Offset=Przesunięcie Y
+
+Direction=Kierunek
+Right=Prawo
+Left=Lewo
+
+Press enter to update the position=Naciśnij Enter, aby zaktualizować pozycję
+
+Top-Middle=Góra-Środek
+Top-Right=Góra-Prawo
+Top-Left=Góra-Lewo
+Middle-Right=Środek-Prawo
+Middle-Left=Środek-Lewo
+Bottom-Right=Dół-Prawo
+Bottom-Left=Dół-Lewo
+Hotbar-Right=Pasek szybkiego dostępu-Prawo
+Hotbar-Left=Pasek szybkiego dostępu-Lewo
+Hotbar-Top-Right=Pasek szybkiego dostępu-Góra-Prawo
+Hotbar-Top-Left=Pasek szybkiego dostępu-Góra-Lewo
+Hotbar-Middle-Right=Pasek szybkiego dostępu-Środek-Prawo
+Hotbar-Middle-Left=Pasek szybkiego dostępu-Środek-Lewo
+Hotbar-Bottom-Right=Pasek szybkiego dostępu-Dół-Prawo
+Hotbar-Bottom-Left=Pasek szybkiego dostępu-Dół-Lewo
+
+Reseted=Zresetowano
+Editor reseted=Edytor został zresetowany
+Fully reseted=Całkowicie zresetowano
+Invalid parameter '@1'=Nieprawidłowy parametr '@1'

@@ -1,22 +1,60 @@
 # textdomain: biometer
 
-Hydration=Hydratatie
-Temperature in=Temperatuur in
-Cancel=Annuleren
-Apply Changes=Wijzigingen toepassen
-Set to Default=Herstellen naar standaard
-This is only for survival mode=Dit is alleen voor de overlevingsmodus
-
-Water Bottle=Fles water
-River Water Bottle=Fles rivierwater
-Drinking Glass with Water=Glas water
-Drinking Glass with River Water=Glas rivierwater
+Bottle with Water=Fles met water
+Bottle with River Water=Fles met rivierwater
+Drinking Glass with Water=Drinkglas met water
+Drinking Glass with River Water=Drinkglas met rivierwater
 Heavy Steel Bottle with Water=Zware stalen fles met water
 Heavy Steel Bottle with River Water=Zware stalen fles met rivierwater
 Bowl=Kom
 Bowl with Water=Kom met water
 Bowl with River Water=Kom met rivierwater
 
-Water=Water
-River Water=Rivierwater
-Bowls with @1 can be used to fill cauldrons=Schalen met @1 kunnen worden gebruikt om ketels te vullen
+Regenerates @1 hydration=Herstelt @1 hydratatie
+
+BioMeter Editor=BioMeter-editor
+
+Apply Changes=Wijzigingen toepassen
+Confirm=Bevestigen
+Cancel=Annuleren
+Set to Default=Standaardinstellingen herstellen
+Custom=Aangepast
+
+Hydration Bar Position=Positie van de hydratatiebalk
+Thermometer Position=Positie van de thermometer
+Temperature in=Temperatuur in
+
+Hydration Bar=Hydratatiebalk
+Temeperature Display=Temperatuurweergave
+
+X-Position=X-positie
+Y-Position=Y-positie
+X-Offset=X-verschuiving
+Y-Offset=Y-verschuiving
+
+Direction=Richting
+Right=Rechts
+Left=Links
+
+Press enter to update the position=Druk op Enter om de positie bij te werken
+
+Top-Middle=Boven-Midden
+Top-Right=Boven-Rechts
+Top-Left=Boven-Links
+Middle-Right=Midden-Rechts
+Middle-Left=Midden-Links
+Bottom-Right=Onder-Rechts
+Bottom-Left=Onder-Links
+Hotbar-Right=Hotbar-Rechts
+Hotbar-Left=Hotbar-Links
+Hotbar-Top-Right=Hotbar-Boven-Rechts
+Hotbar-Top-Left=Hotbar-Boven-Links
+Hotbar-Middle-Right=Hotbar-Midden-Rechts
+Hotbar-Middle-Left=Hotbar-Midden-Links
+Hotbar-Bottom-Right=Hotbar-Onder-Rechts
+Hotbar-Bottom-Left=Hotbar-Onder-Links
+
+Reseted=Gereset
+Editor reseted=Editor gereset
+Fully reseted=Volledig gereset
+Invalid parameter '@1'=Ongeldige parameter '@1'

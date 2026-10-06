@@ -1,22 +1,60 @@
 # textdomain: biometer
 
-Hydration=Idratazione
-Temperature in=Temperatura in
-Cancel=Annulla
-Apply Changes=Applica modifiche
-Set to Default=Ripristina predefinito
-This is only for survival mode=Questo è solo per la modalità sopravvivenza
-
-Water Bottle=Bottiglia d'acqua
-River Water Bottle=Bottiglia d'acqua del fiume
+Bottle with Water=Bottiglia con acqua
+Bottle with River Water=Bottiglia con acqua di fiume
 Drinking Glass with Water=Bicchiere d'acqua
-Drinking Glass with River Water=Bicchiere d'acqua del fiume
-Heavy Steel Bottle with Water=Bottiglia d'acciaio pesante con acqua
-Heavy Steel Bottle with River Water=Bottiglia d'acciaio pesante con acqua di fiume
+Drinking Glass with River Water=Bicchiere con acqua di fiume
+Heavy Steel Bottle with Water=Bottiglia pesante in acciaio con acqua
+Heavy Steel Bottle with River Water=Bottiglia pesante in acciaio con acqua di fiume
 Bowl=Ciotola
 Bowl with Water=Ciotola con acqua
 Bowl with River Water=Ciotola con acqua di fiume
 
-Water=Acqua
-River Water=Acqua del fiume
-Bowls with @1 can be used to fill cauldrons=Ciotole con @1 possono essere usate per riempire calderoni
+Regenerates @1 hydration=Rigenera @1 di idratazione
+
+BioMeter Editor=Editor BioMeter
+
+Apply Changes=Applica modifiche
+Confirm=Conferma
+Cancel=Annulla
+Set to Default=Ripristina predefiniti
+Custom=Personalizzato
+
+Hydration Bar Position=Posizione barra idratazione
+Thermometer Position=Posizione termometro
+Temperature in=Temperatura in
+
+Hydration Bar=Barra idratazione
+Temeperature Display=Visualizzazione temperatura
+
+X-Position=Posizione X
+Y-Position=Posizione Y
+X-Offset=Offset X
+Y-Offset=Offset Y
+
+Direction=Direzione
+Right=Destra
+Left=Sinistra
+
+Press enter to update the position=Premi Invio per aggiornare la posizione
+
+Top-Middle=Alto-Centro
+Top-Right=Alto-Destra
+Top-Left=Alto-Sinistra
+Middle-Right=Centro-Destra
+Middle-Left=Centro-Sinistra
+Bottom-Right=Basso-Destra
+Bottom-Left=Basso-Sinistra
+Hotbar-Right=Barra rapida-Destra
+Hotbar-Left=Barra rapida-Sinistra
+Hotbar-Top-Right=Barra rapida-Alto-Destra
+Hotbar-Top-Left=Barra rapida-Alto-Sinistra
+Hotbar-Middle-Right=Barra rapida-Centro-Destra
+Hotbar-Middle-Left=Barra rapida-Centro-Sinistra
+Hotbar-Bottom-Right=Barra rapida-Basso-Destra
+Hotbar-Bottom-Left=Barra rapida-Basso-Sinistra
+
+Reseted=Reimpostato
+Editor reseted=Editor reimpostato
+Fully reseted=Completamente reimpostato
+Invalid parameter '@1'=Parametro non valido '@1'

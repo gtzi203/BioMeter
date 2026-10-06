@@ -1,14 +1,7 @@
 # textdomain: biometer
 
-Hydration=Hydrierung
-Temperature in=Temperatur in
-Cancel=Abbrechen
-Apply Changes=Änderungen übernehmen
-Set to Default=auf Standart setzen
-This is only for survival mode=Das ist nur für den Überlebensmodus
-
-Water Bottle=Wasserflasche
-River Water Bottle=Flusswasserflasche
+Bottle with Water=Flasche mit Wasser
+Bottle with River Water=Flasche mit Flusswasser
 Drinking Glass with Water=Trinkglas mit Wasser
 Drinking Glass with River Water=Trinkglas mit Flusswasser
 Heavy Steel Bottle with Water=Schwere Stahlflasche mit Wasser
@@ -17,6 +10,49 @@ Bowl=Schale
 Bowl with Water=Schale mit Wasser
 Bowl with River Water=Schale mit Flusswasser
 
-Water=Wasser
-River Water=Flusswasser
-Bowls with @1 can be used to fill cauldrons=Schalen mit @1 können verwendet werden, um Kessel zu füllen
+Regenerates @1 hydration=Regeneriert @1 Hydrierung.
+
+BioMeter Editor=BioMeter Editor
+
+Apply Changes=Änderungen übernehmen
+Confirm=Bestätigen
+Cancel=Abbrechen
+Set to Default=auf Standart setzen
+Custom=Benutzerdefiniert
+
+Hydration Bar Position=Hydrierungsleistenposition
+Thermometer Position=Temperaturanzeigenposition
+Temperature in=Temperatur in
+
+Hydration Bar=Hydrierungsleiste
+Temeperature Display=Temperaturanzeige
+
+Position=Position
+Offset=Versatz
+
+Direction=Richtung
+Right=Rechts
+Left=Links
+
+Press enter to update the position=Drücke Enter, um die Position zu aktualisieren
+
+Top-Middle=Oben-Mitte
+Top-Right=Oben-Rechts
+Top-Left=Oben-Links
+Middle-Right=Mitte-Rechts
+Middle-Left=Mitte-Links
+Bottom-Right=Unten-Rechts
+Bottom-Left=Unten-Links
+Hotbar-Right=Hotbar-Rechts
+Hotbar-Left=Hotbar-Links
+Hotbar-Top-Right=Hotbar-Oben-Rechts
+Hotbar-Top-Left=Hotbar-Oben-Links
+Hotbar-Middle-Right=Hotbar-Mitte-Rechts
+Hotbar-Middle-Left=Hotbar-Mitte-Links
+Hotbar-Bottom-Right=Hotbar-Unten-Rechts
+Hotbar-Bottom-Left=Hotbar-Unten-Links
+
+Reseted=Zurückgesetzt
+Editor reseted=Editor zurückgesetzt
+Fully reseted=Vollständig zurückgesetzt
+Invalid parameter '@1'=Ungültiger Parameter '@1'

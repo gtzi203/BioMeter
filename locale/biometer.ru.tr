@@ -1,14 +1,7 @@
 # textdomain: biometer
 
-Hydration=Гидратация
-Temperature in=Температура в
-Cancel=Отмена
-Apply Changes=Применить изменения
-Set to Default=Сбросить по умолчанию
-This is only for survival mode=Это только для режима выживания
-
-Water Bottle=Бутылка воды
-River Water Bottle=Бутылка речной воды
+Bottle with Water=Бутылка с водой
+Bottle with River Water=Бутылка с речной водой
 Drinking Glass with Water=Стакан с водой
 Drinking Glass with River Water=Стакан с речной водой
 Heavy Steel Bottle with Water=Тяжёлая стальная бутылка с водой
@@ -17,6 +10,51 @@ Bowl=Миска
 Bowl with Water=Миска с водой
 Bowl with River Water=Миска с речной водой
 
-Water=Вода
-River Water=Речная вода
-Bowls with @1 can be used to fill cauldrons=Миски с @1 можно использовать для наполнения котлов
+Regenerates @1 hydration=Восстанавливает @1 гидратации
+
+BioMeter Editor=Редактор BioMeter
+
+Apply Changes=Применить изменения
+Confirm=Подтвердить
+Cancel=Отмена
+Set to Default=Сбросить по умолчанию
+Custom=Пользовательский
+
+Hydration Bar Position=Положение шкалы гидратации
+Thermometer Position=Положение термометра
+Temperature in=Температура в
+
+Hydration Bar=Шкала гидратации
+Temeperature Display=Отображение температуры
+
+X-Position=Позиция X
+Y-Position=Позиция Y
+X-Offset=Смещение X
+Y-Offset=Смещение Y
+
+Direction=Направление
+Right=Справа
+Left=Слева
+
+Press enter to update the position=Нажмите Enter, чтобы обновить позицию
+
+Top-Middle=Сверху-По центру
+Top-Right=Сверху-Справа
+Top-Left=Сверху-Слева
+Middle-Right=По центру-Справа
+Middle-Left=По центру-Слева
+Bottom-Right=Снизу-Справа
+Bottom-Left=Снизу-Слева
+Hotbar-Right=Хотбар-Справа
+Hotbar-Left=Хотбар-Слева
+Hotbar-Top-Right=Хотбар-Сверху-Справа
+Hotbar-Top-Left=Хотбар-Сверху-Слева
+Hotbar-Middle-Right=Хотбар-По центру-Справа
+Hotbar-Middle-Left=Хотбар-По центру-Слева
+Hotbar-Bottom-Right=Хотбар-Снизу-Справа
+Hotbar-Bottom-Left=Хотбар-Снизу-Слева
+
+Reseted=Сброшено
+Editor reseted=Редактор сброшен
+Fully reseted=Полностью сброшено
+Invalid parameter '@1'=Недопустимый параметр '@1'

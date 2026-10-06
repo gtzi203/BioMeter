@@ -1,14 +1,7 @@
 # textdomain: biometer
 
-Hydration=
-Temperature in=
-Cancel=
-Apply Changes=
-Set to Default=
-This is only for survival mode=
-
-Water Bottle=
-River Water Bottle=
+Bottle with Water=
+Bottle with River Water=
 Drinking Glass with Water=
 Drinking Glass with River Water=
 Heavy Steel Bottle with Water=
@@ -17,6 +10,51 @@ Bowl=
 Bowl with Water=
 Bowl with River Water=
 
-Water=
-River Water=
-Bowls with @1 can be used to fill cauldrons=
+Regenerates @1 hydration=
+
+BioMeter Editor=
+
+Apply Changes=
+Confirm=
+Cancel=
+Set to Default=
+Custom=
+
+Hydration Bar Position=
+Thermometer Position=
+Temperature in=
+
+Hydration Bar=
+Temeperature Display=
+
+X-Position=
+Y-Position=
+X-Offset=
+Y-Offset=
+
+Direction=
+Right=
+Left=
+
+Press enter to update the position=
+
+Top-Middle=
+Top-Right=
+Top-Left=
+Middle-Right=
+Middle-Left=
+Bottom-Right=
+Bottom-Left=
+Hotbar-Right=
+Hotbar-Left=
+Hotbar-Top-Right=
+Hotbar-Top-Left=
+Hotbar-Middle-Right=
+Hotbar-Middle-Left=
+Hotbar-Bottom-Right=
+Hotbar-Bottom-Left=
+
+Reseted=
+Editor reseted=
+Fully reseted=
+Invalid parameter '@1'=

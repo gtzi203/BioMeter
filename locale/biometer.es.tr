@@ -1,22 +1,60 @@
 # textdomain: biometer
 
-Hydration=Hidratación
-Temperature in=Temperatura en
-Cancel=Cancelar
-Apply Changes=Aplicar cambios
-Set to Default=Restablecer valores predeterminados
-This is only for survival mode=Esto es solo para el modo supervivencia
-
-Water Bottle=Botella de agua
-River Water Bottle=Botella de agua de río
-Drinking Glass with Water=Vaso de agua
-Drinking Glass with River Water=Vaso de agua de río
-Heavy Steel Bottle with Water=Botella de acero pesada con agua
-Heavy Steel Bottle with River Water=Botella de acero pesada con agua de río
+Bottle with Water=Botella con agua
+Bottle with River Water=Botella con agua de río
+Drinking Glass with Water=Vaso con agua
+Drinking Glass with River Water=Vaso con agua de río
+Heavy Steel Bottle with Water=Botella pesada de acero con agua
+Heavy Steel Bottle with River Water=Botella pesada de acero con agua de río
 Bowl=Cuenco
 Bowl with Water=Cuenco con agua
 Bowl with River Water=Cuenco con agua de río
 
-Water=Agua
-River Water=Agua de río
-Bowls with @1 can be used to fill cauldrons=Los cuencos con @1 pueden usarse para llenar calderos
+Regenerates @1 hydration=Recupera @1 de hidratación
+
+BioMeter Editor=Editor de BioMeter
+
+Apply Changes=Aplicar cambios
+Confirm=Confirmar
+Cancel=Cancelar
+Set to Default=Restablecer valores predeterminados
+Custom=Personalizado
+
+Hydration Bar Position=Posición de la barra de hidratación
+Thermometer Position=Posición del termómetro
+Temperature in=Temperatura en
+
+Hydration Bar=Barra de hidratación
+Temeperature Display=Visualización de temperatura
+
+X-Position=Posición X
+Y-Position=Posición Y
+X-Offset=Desplazamiento X
+Y-Offset=Desplazamiento Y
+
+Direction=Dirección
+Right=Derecha
+Left=Izquierda
+
+Press enter to update the position=Pulse Intro para actualizar la posición
+
+Top-Middle=Arriba-Centro
+Top-Right=Arriba-Derecha
+Top-Left=Arriba-Izquierda
+Middle-Right=Centro-Derecha
+Middle-Left=Centro-Izquierda
+Bottom-Right=Abajo-Derecha
+Bottom-Left=Abajo-Izquierda
+Hotbar-Right=Barra rápida-Derecha
+Hotbar-Left=Barra rápida-Izquierda
+Hotbar-Top-Right=Barra rápida-Arriba-Derecha
+Hotbar-Top-Left=Barra rápida-Arriba-Izquierda
+Hotbar-Middle-Right=Barra rápida-Centro-Derecha
+Hotbar-Middle-Left=Barra rápida-Centro-Izquierda
+Hotbar-Bottom-Right=Barra rápida-Abajo-Derecha
+Hotbar-Bottom-Left=Barra rápida-Abajo-Izquierda
+
+Reseted=Restablecido
+Editor reseted=Editor restablecido
+Fully reseted=Completamente restablecido
+Invalid parameter '@1'=Parámetro no válido '@1'

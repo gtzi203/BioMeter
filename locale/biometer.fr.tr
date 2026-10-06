@@ -1,22 +1,60 @@
 # textdomain: biometer
 
-Hydration=Hydratation
-Temperature in=Température en
-Cancel=Annuler
-Apply Changes=Appliquer les modifications
-Set to Default=Réinitialiser par défaut
-This is only for survival mode=Ceci est uniquement pour le mode survie
-
-Water Bottle=Bouteille d'eau
-River Water Bottle=Bouteille d'eau de rivière
+Bottle with Water=Bouteille d'eau
+Bottle with River Water=Bouteille d'eau de rivière
 Drinking Glass with Water=Verre d'eau
 Drinking Glass with River Water=Verre d'eau de rivière
 Heavy Steel Bottle with Water=Bouteille en acier lourde avec de l'eau
 Heavy Steel Bottle with River Water=Bouteille en acier lourde avec de l'eau de rivière
 Bowl=Bol
-Bowl with Water=Bol avec de l'eau
-Bowl with River Water=Bol avec de l'eau de rivière
+Bowl with Water=Bol d'eau
+Bowl with River Water=Bol d'eau de rivière
 
-Water=Eau
-River Water=Eau de rivière
-Bowls with @1 can be used to fill cauldrons=Des bols avec @1 peuvent être utilisés pour remplir les chaudrons
+Regenerates @1 hydration=Restaure @1 d'hydratation
+
+BioMeter Editor=Éditeur BioMeter
+
+Apply Changes=Appliquer les modifications
+Confirm=Confirmer
+Cancel=Annuler
+Set to Default=Réinitialiser par défaut
+Custom=Personnalisé
+
+Hydration Bar Position=Position de la barre d'hydratation
+Thermometer Position=Position du thermomètre
+Temperature in=Température en
+
+Hydration Bar=Barre d'hydratation
+Temeperature Display=Affichage de la température
+
+X-Position=Position X
+Y-Position=Position Y
+X-Offset=Décalage X
+Y-Offset=Décalage Y
+
+Direction=Direction
+Right=Droite
+Left=Gauche
+
+Press enter to update the position=Appuyez sur Entrée pour mettre à jour la position
+
+Top-Middle=Haut-Centre
+Top-Right=Haut-Droite
+Top-Left=Haut-Gauche
+Middle-Right=Milieu-Droite
+Middle-Left=Milieu-Gauche
+Bottom-Right=Bas-Droite
+Bottom-Left=Bas-Gauche
+Hotbar-Right=Barre rapide-Droite
+Hotbar-Left=Barre rapide-Gauche
+Hotbar-Top-Right=Barre rapide-Haut-Droite
+Hotbar-Top-Left=Barre rapide-Haut-Gauche
+Hotbar-Middle-Right=Barre rapide-Milieu-Droite
+Hotbar-Middle-Left=Barre rapide-Milieu-Gauche
+Hotbar-Bottom-Right=Barre rapide-Bas-Droite
+Hotbar-Bottom-Left=Barre rapide-Bas-Gauche
+
+Reseted=Réinitialisé
+Editor reseted=Éditeur réinitialisé
+Fully reseted=Entièrement réinitialisé
+Invalid parameter '@1'=Paramètre invalide '@1'
